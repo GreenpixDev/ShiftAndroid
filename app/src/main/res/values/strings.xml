@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ShiftAndroid</string>
+    <string name="textRegistration">У вас нет аккаунта?</string>
 </resources>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".RegistrationActivity">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutLogin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -17,11 +16,11 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.13"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911"
+        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.72"
         app:startIconDrawable="@drawable/ic_baseline_person_24">
@@ -60,36 +59,32 @@
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonInput"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPasswordRepeat"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Войти"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.657"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.72"
+        app:startIconDrawable="@drawable/key">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/textRegistration"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPassword"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.05"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@+id/buttonInput"
-        app:layout_constraintVertical_bias="0.357"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.72" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repeat password" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonInviteToRegistration"
@@ -97,13 +92,15 @@
         android:layout_height="0dp"
         android:text="Зарегистрироваться"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordRepeat"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordRepeat"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordRepeat"
+        app:layout_constraintVertical_bias="0.432"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.72" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
