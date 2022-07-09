@@ -13,9 +13,11 @@
         android:background="@drawable/ic_circle" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/example_day_number"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintEnd_toEndOf="@+id/imageButton"
         app:layout_constraintStart_toStartOf="@+id/imageButton"

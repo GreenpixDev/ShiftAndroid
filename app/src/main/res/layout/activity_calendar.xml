@@ -19,11 +19,33 @@
             android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2022 Июль"
+            android:text="@string/example_year_and_month"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/nextMonth"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toEndOf="@+id/month"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/previousMonth"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/month"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,160 +85,47 @@
 
                 <TextView
                     android:gravity="center"
-                    android:text="пн" />
+                    android:text="@string/short_monday" />
 
                 <TextView
                     android:gravity="center"
-                    android:text="вт" />
+                    android:text="@string/short_tuesday" />
 
                 <TextView
                     android:gravity="center"
-                    android:text="ср" />
+                    android:text="@string/short_wednesday" />
 
                 <TextView
                     android:gravity="center"
-                    android:text="чт" />
+                    android:text="@string/short_thursday" />
 
                 <TextView
                     android:gravity="center"
-                    android:text="пт" />
+                    android:text="@string/short_friday" />
 
                 <TextView
                     android:gravity="center"
-                    android:text="сб" />
+                    android:text="@string/short_saturday" />
 
                 <TextView
                     android:gravity="center"
-                    android:text="вс" />
+                    android:text="@string/short_sunday" />
 
                 <Space />
             </TableRow>
 
-            <TableRow
-                android:layout_marginVertical="3dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="15dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="1" />
-
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_marginVertical="3dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="2" />
-
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_weight="1"
-                android:layout_marginVertical="3dp">
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="3" />
-
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_weight="1"
-                android:layout_marginVertical="3dp">
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="4" />
-
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_weight="1"
-                android:layout_marginVertical="3dp">
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="5" />
-
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-                <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
-                    android:layout_gravity="center"/>
-            </TableRow>
+            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
         </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

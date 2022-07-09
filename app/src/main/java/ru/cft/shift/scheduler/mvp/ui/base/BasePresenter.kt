@@ -2,7 +2,7 @@ package ru.cft.shift.scheduler.mvp.ui.base
 
 open class BasePresenter<V : MvpView> : MvpPresenter {
 
-    protected var view: V? = null
+    public var view: V? = null
     private set
 
     override fun attachView(mvpView: MvpView) {
@@ -12,4 +12,9 @@ open class BasePresenter<V : MvpView> : MvpPresenter {
     override fun detachView() {
         view = null
     }
+
+    open fun onAttachView(mvpView: V) {}
+
+    open fun onDetachView() {}
+
 }

@@ -6,4 +6,8 @@ interface DayMvpView : MvpView {
 
     fun updateDayNumber(day: Int)
 
+    fun updateIsWeekend(value: Boolean)
+
+    fun updateIsCurrentMonth(value: Boolean)
+
 }
