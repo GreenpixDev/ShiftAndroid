@@ -7,7 +7,9 @@ interface CalendarMvpView : MvpView {
 
     fun showCalendar(year: Int, month: Int)
 
-    fun showSettingsFragment()
+    fun showSettingsModalWindow()
+
+    fun hideModalWindow()
 
     fun clearEventViews()
 

@@ -10,6 +10,7 @@ import ru.cft.shift.scheduler.databinding.ActivityCalendarBinding
 import ru.cft.shift.scheduler.mvp.data.Event
 import ru.cft.shift.scheduler.mvp.ui.base.BaseActivity
 import ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+import ru.cft.shift.scheduler.mvp.ui.calendar.settings.SettingsFragment
 import ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
 import java.text.DateFormatSymbols
 import java.util.*
@@ -73,9 +74,27 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         startActivity(intent)
     }
 
-    override fun showSettingsFragment() {
-        // TODO убрать заглушку и сделать
-        println("Show Settings")
+    override fun showSettingsModalWindow() {
+        val fragment = SettingsFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.modal_window, fragment)
+        transaction.commit()
+    }
+
+    /*override fun showEventModalFragment() {
+        val fragment = EventModalFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.modal_window, fragment)
+        transaction.commit()
+    }*/
+
+    override fun hideModalWindow() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.modal_window)
+        fragment?.let {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.remove(it)
+            transaction.commit()
+        }
     }
 
     override fun clearEventViews() {

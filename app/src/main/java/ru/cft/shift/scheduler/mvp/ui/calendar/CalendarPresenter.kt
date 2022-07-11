@@ -59,7 +59,7 @@ class CalendarPresenter : BasePresenter<CalendarMvpView>(), CalendarMvpPresenter
     }
 
     override fun onShowSettingsClick() {
-        view?.showSettingsFragment()
+        view?.showSettingsModalWindow()
     }
 
     override fun onNextMonthClick() {
