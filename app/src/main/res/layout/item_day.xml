@@ -8,9 +8,12 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/ic_circle" />
+        style="@style/Calendar.Day" />
+
+    <ImageView
+        android:id="@+id/selection"
+        android:visibility="invisible"
+        style="@style/Calendar.Day.Selected"/>
 
     <TextView
         android:id="@+id/number"

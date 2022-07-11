@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.get
+import com.airbnb.paris.extensions.style
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.ActivityCalendarBinding
+import ru.cft.shift.scheduler.mvp.data.Event
 import ru.cft.shift.scheduler.mvp.ui.base.BaseActivity
-import ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekMvpView
+import ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+import ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
 import java.text.DateFormatSymbols
 import java.util.*
 
@@ -44,8 +47,11 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
                 binding.calendarLayout.removeViewAt(row)
             }
             else {
-                val weekView = binding.calendarLayout[row] as WeekMvpView
+                val weekView = binding.calendarLayout[row] as WeekView
                 val weekNumber = date.get(Calendar.WEEK_OF_YEAR)
+
+                presenter.weekPresenters.add(weekView.presenter)
+                weekView.attachDayClickListener { presenter.onDayClick(it) }
 
                 weekView.updateWeekNumber(weekNumber)
                 weekView.updateDaysFrom(month, date)
@@ -54,7 +60,7 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         }
         binding.month.text = "$year ${DateFormatSymbols().months[month]}"
 
-        presenter.onAttachYearAndMonth(year, month)
+        presenter.attachYearAndMonth(year, month)
     }
 
     override fun createPresenter() = CalendarPresenter()
@@ -70,6 +76,20 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
     override fun showSettingsFragment() {
         // TODO убрать заглушку и сделать
         println("Show Settings")
+    }
+
+    override fun clearEventViews() {
+        while (binding.eventList.childCount > 0) {
+            binding.eventList.removeViewAt(0)
+        }
+    }
+
+    override fun addEventView(event: Event) {
+        val eventView = EventView(this)
+        eventView.style(R.style.Calendar_Event)
+        eventView.updateMark(event.mark)
+
+        binding.eventList.addView(eventView)
     }
 
     private companion object {

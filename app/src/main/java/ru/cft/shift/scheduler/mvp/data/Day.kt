@@ -1,6 +1,8 @@
 package ru.cft.shift.scheduler.mvp.data
 
+import java.util.*
+
 data class Day(
-    val month: Int,
+    val date: Calendar,
     val events: Collection<Event>
-)
+    )

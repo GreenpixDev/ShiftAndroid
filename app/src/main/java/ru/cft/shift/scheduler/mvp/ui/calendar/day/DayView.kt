@@ -15,10 +15,14 @@ class DayView @JvmOverloads constructor(
 
     private val binding = ItemDayBinding.inflate(LayoutInflater.from(context), this)
 
-    private val presenter = DayPresenter()
+    val presenter = DayPresenter()
 
     init {
         presenter.attachView(this)
+    }
+
+    override fun attachClickListener(listener: (DayMvpPresenter) -> Unit) {
+        binding.imageButton.setOnClickListener { listener.invoke(presenter) }
     }
 
     override fun updateDayNumber(day: Int) {
@@ -32,5 +36,13 @@ class DayView @JvmOverloads constructor(
 
     override fun updateIsCurrentMonth(value: Boolean) {
         binding.number.alpha = if (value) 1f else .3f
+    }
+
+    override fun showSelection() {
+        binding.selection.visibility = VISIBLE
+    }
+
+    override fun hideSelection() {
+        binding.selection.visibility = INVISIBLE
     }
 }

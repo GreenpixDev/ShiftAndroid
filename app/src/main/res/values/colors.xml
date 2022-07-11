@@ -11,5 +11,22 @@
     <color name="background">#F0F0F0</color>
     <color name="cyan">#B8D6D8</color>
     <color name="red">#FF0000</color>
-    <color name="light_gray">#E8E8E8</color>
+    <color name="light_gray">#E1E1E1</color>
+    <color name="light_blue">#00BDF9</color>
+
+    <color name="mark_dark_common">#8C7777</color>
+    <color name="mark_dark_red">#A14343</color>
+    <color name="mark_dark_green">#58875D</color>
+    <color name="mark_dark_blue">#57668B</color>
+    <color name="mark_dark_yellow">#94915D</color>
+    <color name="mark_dark_violet">#793AAB</color>
+    <color name="mark_dark_black">#1F1F1F</color>
+
+    <color name="mark_light_common">#E5DADA</color>
+    <color name="mark_light_red">#F8D0D0</color>
+    <color name="mark_light_green">#BAEABF</color>
+    <color name="mark_light_blue">#CBD9FA</color>
+    <color name="mark_light_yellow">#EDE8A2</color>
+    <color name="mark_light_violet">#E4CEF6</color>
+    <color name="mark_light_black">#C6C6C6</color>
 </resources>

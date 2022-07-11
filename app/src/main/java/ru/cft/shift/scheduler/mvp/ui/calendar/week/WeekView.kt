@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.widget.TableRow
 import androidx.core.view.get
 import ru.cft.shift.scheduler.databinding.ItemWeekBinding
-import ru.cft.shift.scheduler.mvp.ui.calendar.day.DayMvpView
+import ru.cft.shift.scheduler.mvp.ui.calendar.day.DayMvpPresenter
+import ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
 import java.util.*
 
 class WeekView @JvmOverloads constructor(
@@ -16,10 +17,16 @@ class WeekView @JvmOverloads constructor(
 
     private val binding = ItemWeekBinding.inflate(LayoutInflater.from(context), this)
 
-    private val presenter = WeekPresenter()
+    private lateinit var dayClickListener: (DayMvpPresenter) -> Unit
+
+    val presenter = WeekPresenter()
 
     init {
         presenter.attachView(this)
+    }
+
+    override fun attachDayClickListener(listener: (DayMvpPresenter) -> Unit) {
+        dayClickListener = listener
     }
 
     override fun updateWeekNumber(week: Int) {
@@ -30,7 +37,11 @@ class WeekView @JvmOverloads constructor(
         val date = firstWeekDay.clone() as Calendar
 
         for (column in 1..7) {
-            val dayView = get(column) as DayMvpView
+            val dayView = get(column) as DayView
+
+            presenter.dayPresenters.add(dayView.presenter)
+            dayView.attachClickListener(dayClickListener)
+
             dayView.updateDayNumber(date.get(Calendar.DAY_OF_MONTH))
             dayView.updateIsWeekend(column == 7)
             dayView.updateIsCurrentMonth(date.get(Calendar.MONTH) == month)
