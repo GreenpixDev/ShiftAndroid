@@ -16,4 +16,9 @@
     <string name="short_friday">пт</string>
     <string name="short_saturday">сб</string>
     <string name="short_sunday">вс</string>
+
+    <string name="logout">Выйти</string>
+    <string name="share">Поделиться</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
 </resources>

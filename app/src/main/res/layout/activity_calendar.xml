@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
+    android:background="@color/background"
     tools:context=".MainActivity"
     tools:ignore="MissingConstraints">
 
@@ -40,9 +40,9 @@
 
             <ImageView
                 android:layout_gravity="center"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@color/black" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_right_two_arrows" />
         </FrameLayout>
 
         <FrameLayout
@@ -57,9 +57,9 @@
 
             <ImageView
                 android:layout_gravity="center"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@color/black" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_left_two_arrows" />
         </FrameLayout>
 
         <FrameLayout

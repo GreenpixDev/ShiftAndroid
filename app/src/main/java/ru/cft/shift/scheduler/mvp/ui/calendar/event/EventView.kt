@@ -25,4 +25,8 @@ class EventView @JvmOverloads constructor(
         background.setTint(ContextCompat.getColor(context, mark.backgroundColor))
         binding.mark.background.setTint(ContextCompat.getColor(context, mark.defaultColor))
     }
+
+    override fun attachActionClickListener(listener: (EventMvpPresenter) -> Unit) {
+        binding.action.setOnClickListener { listener.invoke(presenter) }
+    }
 }

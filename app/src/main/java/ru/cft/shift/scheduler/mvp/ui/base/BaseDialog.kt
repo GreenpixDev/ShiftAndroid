@@ -7,7 +7,7 @@ abstract class BaseDialog<P : MvpPresenter> : DialogFragment(), MvpView {
 
     private lateinit var _presenter: P
 
-    public val presenter: P
+    val presenter: P
     get() = _presenter
 
     protected abstract fun createPresenter(): P

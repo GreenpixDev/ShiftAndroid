@@ -9,7 +9,9 @@ import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.ActivityCalendarBinding
 import ru.cft.shift.scheduler.mvp.data.Event
 import ru.cft.shift.scheduler.mvp.ui.base.BaseActivity
+import ru.cft.shift.scheduler.mvp.ui.calendar.event.EventMvpPresenter
 import ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+import ru.cft.shift.scheduler.mvp.ui.calendar.event.modal.EventModalFragment
 import ru.cft.shift.scheduler.mvp.ui.calendar.settings.SettingsFragment
 import ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
 import java.text.DateFormatSymbols
@@ -81,12 +83,12 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         transaction.commit()
     }
 
-    /*override fun showEventModalFragment() {
-        val fragment = EventModalFragment()
+    override fun showEventModalFragment(presenter: EventMvpPresenter) {
+        val fragment = EventModalFragment(presenter)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.modal_window, fragment)
         transaction.commit()
-    }*/
+    }
 
     override fun hideModalWindow() {
         val fragment = supportFragmentManager.findFragmentById(R.id.modal_window)
@@ -107,6 +109,7 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         val eventView = EventView(this)
         eventView.style(R.style.Calendar_Event)
         eventView.updateMark(event.mark)
+        eventView.attachActionClickListener { showEventModalFragment(it) }
 
         binding.eventList.addView(eventView)
     }

@@ -7,7 +7,7 @@ abstract class BaseActivity<P : MvpPresenter> : AppCompatActivity(), MvpView {
 
     private lateinit var _presenter: P
 
-    public val presenter: P
+    val presenter: P
     get() = _presenter
 
     protected abstract fun createPresenter(): P

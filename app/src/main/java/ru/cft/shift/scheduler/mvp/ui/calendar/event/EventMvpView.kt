@@ -7,4 +7,6 @@ interface EventMvpView : MvpView {
 
     fun updateMark(mark: Mark)
 
+    fun attachActionClickListener(listener: (EventMvpPresenter) -> Unit)
+
 }
