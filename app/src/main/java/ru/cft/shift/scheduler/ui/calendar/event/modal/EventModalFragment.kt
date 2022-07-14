@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ru.cft.shift.scheduler.EventActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentEventBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
@@ -24,6 +25,8 @@ class EventModalFragment(val eventPresenter: EventMvpPresenter)
         binding.background.setOnClickListener { hideModalWindow() }
         binding.window.setOnClickListener(null)
         binding.share.setOnClickListener { showShareWindow() }
+        binding.edit.setOnClickListener { showEventMenu() }
+        binding.delete.setOnClickListener { presenter.onDeleteEvent() }
 
         return binding.root
     }
@@ -43,6 +46,12 @@ class EventModalFragment(val eventPresenter: EventMvpPresenter)
         intent.type = MIME_PLAIN_TEXT
         intent.putExtra(Intent.EXTRA_TEXT, "https://calendar.ru/event?id=15325")
         startActivity(Intent.createChooser(intent, resources.getString(R.string.delete)))
+    }
+
+    override fun showEventMenu() {
+        val intent = Intent(context, EventActivity::class.java)
+        // TODO передавать данные события (айдишника хватит)
+        startActivity(intent)
     }
 
     override fun createPresenter() = EventModalPresenter()

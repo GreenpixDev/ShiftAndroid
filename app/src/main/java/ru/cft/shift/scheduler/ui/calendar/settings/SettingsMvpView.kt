@@ -4,4 +4,6 @@ import ru.cft.shift.scheduler.ui.base.MvpView
 
 interface SettingsMvpView : MvpView {
 
+    fun showLoginMenu()
+
 }

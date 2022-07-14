@@ -4,4 +4,6 @@ import ru.cft.shift.scheduler.ui.base.MvpPresenter
 
 interface SettingsMvpPresenter : MvpPresenter {
 
+    fun onLogoutClick()
+
 }

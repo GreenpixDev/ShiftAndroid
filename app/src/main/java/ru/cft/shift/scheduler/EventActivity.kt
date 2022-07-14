@@ -1,13 +1,9 @@
 package ru.cft.shift.scheduler
 
-import android.app.ProgressDialog.show
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.Color.red
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CheckBox
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import ru.cft.shift.scheduler.databinding.*
 
@@ -54,6 +50,8 @@ class EventActivity : AppCompatActivity() {
         binding.colour.setOnClickListener {
             bottomSheetColor.show()
         }
+
+        binding.closeButton.setOnClickListener { closeActivity() }
 
 
         var choosenType = bindingBottomSheetEventType.checkBox
@@ -265,9 +263,10 @@ class EventActivity : AppCompatActivity() {
         bindingBottomSheetColor.buttonCancel.setOnClickListener {
             bottomSheetColor.dismiss()
         }
+    }
 
-
-
+    private fun closeActivity() {
+        finish()
     }
 
 }

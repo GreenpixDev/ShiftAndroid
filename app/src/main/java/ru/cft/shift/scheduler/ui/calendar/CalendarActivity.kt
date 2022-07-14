@@ -8,6 +8,7 @@ import com.airbnb.paris.extensions.style
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.databinding.ActivityCalendarBinding
+import ru.cft.shift.scheduler.di.component.DaggerApplicationComponent
 import ru.cft.shift.scheduler.ui.base.BaseActivity
 import ru.cft.shift.scheduler.ui.calendar.event.EventMvpPresenter
 import ru.cft.shift.scheduler.ui.calendar.event.EventView
@@ -22,15 +23,15 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
 
     private lateinit var binding: ActivityCalendarBinding
 
-    @Inject lateinit var mvpPresenter: CalendarMvpPresenter
+    @Inject override lateinit var presenter: CalendarMvpPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerApplicationComponent.create().inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        component.inject(this)
 
         binding.settings.setOnClickListener { presenter.onShowSettingsClick() }
         binding.nextMonth.setOnClickListener { presenter.onNextMonthClick() }
@@ -70,8 +71,6 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
 
         presenter.attachYearAndMonth(year, month)
     }
-
-    override fun createPresenter() = mvpPresenter
 
     override fun showCalendar(year: Int, month: Int) {
         val intent = Intent(this, CalendarActivity::class.java).apply {
