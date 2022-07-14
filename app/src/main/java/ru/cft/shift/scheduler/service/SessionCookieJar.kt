@@ -12,6 +12,8 @@ class SessionCookieJar : CookieJar {
         this.cookies.addAll(cookies)
     }
 
-    override fun loadForRequest(url: HttpUrl) = cookies
+    override fun loadForRequest(url: HttpUrl): List<Cookie> {
+        return cookies
+    }
 
 }
