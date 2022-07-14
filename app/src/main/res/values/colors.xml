@@ -7,6 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="blue">#42AAFF</color>
+    <color name="green">#1E5945</color>
+    <color name="berlin_lazur">#003153</color>
+    <color name="biruz_green">#1E5945</color>
+
     <color name="fogging">#1A000000</color>
 
     <color name="background">#F0F0F0</color>
