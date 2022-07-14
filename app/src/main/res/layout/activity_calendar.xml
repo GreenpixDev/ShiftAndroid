@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity"
+    tools:ignore="MissingConstraints">
+
+    <!-- Шапка -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/cyan"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/example_year_and_month"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/nextMonth"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/month"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_right_two_arrows" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/previousMonth"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/month"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_left_two_arrows" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/settings"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_more" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Календарь -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <TableLayout
+            android:id="@+id/calendarLayout"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableRow android:layout_weight="1">
+
+                <Space />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_monday" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_tuesday" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_wednesday" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_thursday" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_friday" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_saturday" />
+
+                <TextView
+                    android:gravity="center"
+                    android:text="@string/short_sunday" />
+
+                <Space />
+            </TableRow>
+
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
+                android:layout_marginVertical="3dp" />
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- События -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <LinearLayout
+            android:id="@+id/eventList"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_common" />
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_red" />
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_green" />
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_blue" />
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_yellow" />
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_violet" />
+
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
+                style="@style/Calendar.Event"
+                android:backgroundTint="@color/mark_light_black" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Модальное окно настроек -->
+    <FrameLayout
+        android:id="@+id/modal_window"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
