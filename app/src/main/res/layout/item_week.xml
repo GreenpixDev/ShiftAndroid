@@ -12,19 +12,19 @@
         android:gravity="center"
         android:text="@string/example_week_number" />
 
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center" />
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center"/>
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center"/>
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center"/>
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center"/>
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center"/>
-    <ru.cft.shift.scheduler.mvp.ui.calendar.day.DayView
+    <ru.cft.shift.scheduler.ui.calendar.day.DayView
         android:layout_gravity="center"/>
 
 </merge>

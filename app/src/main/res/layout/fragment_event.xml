@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fogging"
-    tools:context=".mvp.ui.calendar.settings.SettingsFragment"
+    tools:context=".ui.calendar.settings.SettingsFragment"
     tools:ignore="MissingConstraints">
 
     <androidx.constraintlayout.widget.ConstraintLayout

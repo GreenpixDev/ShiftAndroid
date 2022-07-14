@@ -131,17 +131,17 @@
                 <Space />
             </TableRow>
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
                 android:layout_marginVertical="3dp" />
-            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
                 android:layout_marginVertical="3dp" />
-            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
                 android:layout_marginVertical="3dp" />
-            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
                 android:layout_marginVertical="3dp" />
-            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
                 android:layout_marginVertical="3dp" />
-            <ru.cft.shift.scheduler.mvp.ui.calendar.week.WeekView
+            <ru.cft.shift.scheduler.ui.calendar.week.WeekView
                 android:layout_marginVertical="3dp" />
         </TableLayout>
 
@@ -163,31 +163,31 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_common" />
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_red" />
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_green" />
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_blue" />
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_yellow" />
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_violet" />
 
-            <ru.cft.shift.scheduler.mvp.ui.calendar.event.EventView
+            <ru.cft.shift.scheduler.ui.calendar.event.EventView
                 style="@style/Calendar.Event"
                 android:backgroundTint="@color/mark_light_black" />
         </LinearLayout>
