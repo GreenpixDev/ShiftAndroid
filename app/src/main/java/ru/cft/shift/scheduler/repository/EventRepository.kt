@@ -1,5 +1,6 @@
 package ru.cft.shift.scheduler.repository
 
+import retrofit2.Call
 import retrofit2.http.*
 import ru.cft.shift.scheduler.dto.*
 
@@ -8,17 +9,17 @@ interface EventRepository {
     @GET("/api/calendar/{id}")
     fun findById(
         @Path("id") id: Long
-    ): EventInfoResponse
+    ): Call<EventInfoResponse>
 
     @POST("/api/calendar/day")
     fun findByDate(
         @Body day: DayRequest
-    ): EventsResponse
+    ): Call<EventsResponse>
 
     @POST("/api/calendar")
     fun findByPeriod(
         @Body period: DateRequest
-    ): EventsResponse
+    ): Call<EventsResponse>
 
     @POST("/api/calendar/add_event")
     fun create(
