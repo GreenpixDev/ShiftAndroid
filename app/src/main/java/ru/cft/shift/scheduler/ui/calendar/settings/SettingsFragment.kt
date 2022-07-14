@@ -9,10 +9,19 @@ import ru.cft.shift.scheduler.MainActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentSettingsBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
+import javax.inject.Inject
 
 class SettingsFragment : BaseFragment<SettingsMvpPresenter>(), SettingsMvpView {
 
     private lateinit var binding: FragmentSettingsBinding
+
+    @Inject
+    override lateinit var presenter: SettingsMvpPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        component.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +49,4 @@ class SettingsFragment : BaseFragment<SettingsMvpPresenter>(), SettingsMvpView {
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
     }
-
-    override fun createPresenter() = SettingsPresenter()
 }
