@@ -22,6 +22,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        component.inject(this)
 
         binding = ActivityEventBinding.inflate(layoutInflater)
         bindingBottomSheetEventType = BottomSheetEventTypeBinding.inflate(layoutInflater)

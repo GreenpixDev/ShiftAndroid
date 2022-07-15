@@ -9,12 +9,32 @@ class EventModalPresenter @Inject constructor(
     private val eventRepository: EventRepository
 ) : BasePresenter<EventModalMvpView>(), EventModalMvpPresenter {
 
-    override fun onDeleteEvent() {
-        eventRepository.delete(1).enqueueSafe(CallbackBuilder.create<Void>()
-            .onResponse { _, _ -> view?.hideModalWindow() }
-            .onFailure { _, _ -> view?.hideModalWindow() }
-            .build()
-        )
+    override val eventId: Long?
+        get() = view?.eventId
+
+    override fun onShareClick() {
+        eventId?.let {
+            view?.showShareWindow("http://plannerrestapi.herokuapp.com/api/calendar/get/?id_event=$it")
+        }
+    }
+
+    override fun onDeleteEventClick() {
+        eventId?.let {
+            eventRepository.delete(it).enqueueSafe(CallbackBuilder.create<Void>()
+                .onResponse { _, _ ->
+                    view?.hideModalWindow()
+                    view?.removeEvent()
+                }
+                .onFailure { _, _ -> view?.hideModalWindow() }
+                .build()
+            )
+        }
+    }
+
+    override fun onEditEventClick() {
+        eventId?.let {
+            view?.showEventMenu()
+        }
     }
 
 }

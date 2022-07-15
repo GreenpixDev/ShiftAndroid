@@ -6,6 +6,8 @@ import ru.cft.shift.scheduler.ui.calendar.event.EventMvpPresenter
 
 interface CalendarMvpView : MvpView {
 
+    fun reloadCalendar()
+
     fun showCalendar(year: Int, month: Int)
 
     fun showSettingsModalWindow()

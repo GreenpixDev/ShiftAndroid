@@ -4,4 +4,8 @@ import ru.cft.shift.scheduler.ui.base.MvpPresenter
 
 interface EventMvpPresenter : MvpPresenter {
 
+    var eventId: Long?
+
+    fun remove()
+
 }

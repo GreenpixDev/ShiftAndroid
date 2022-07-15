@@ -13,13 +13,20 @@ import ru.cft.shift.scheduler.ui.event.EventActivity
 import javax.inject.Inject
 
 class EventModalFragment(
-    val eventPresenter: EventMvpPresenter
-    ) : BaseFragment<EventModalMvpPresenter>(), EventModalMvpView {
+    private val eventPresenter: EventMvpPresenter
+) : BaseFragment<EventModalMvpPresenter>(), EventModalMvpView {
+
+    private companion object {
+        const val MIME_PLAIN_TEXT = "plain/text"
+    }
 
     private lateinit var binding: FragmentEventBinding
 
     @Inject
     override lateinit var presenter: EventModalMvpPresenter
+
+    override val eventId: Long?
+        get() = eventPresenter.eventId
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +41,9 @@ class EventModalFragment(
 
         binding.background.setOnClickListener { hideModalWindow() }
         binding.window.setOnClickListener(null)
-        binding.share.setOnClickListener { showShareWindow() }
-        binding.edit.setOnClickListener { showEventMenu() }
-        binding.delete.setOnClickListener { presenter.onDeleteEvent() }
+        binding.share.setOnClickListener { presenter.onShareClick() }
+        binding.edit.setOnClickListener { presenter.onEditEventClick() }
+        binding.delete.setOnClickListener { presenter.onDeleteEventClick() }
 
         return binding.root
     }
@@ -50,11 +57,15 @@ class EventModalFragment(
         }
     }
 
-    override fun showShareWindow() {
+    override fun removeEvent() {
+        eventPresenter.remove();
+    }
+
+    override fun showShareWindow(url: String) {
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
         intent.type = MIME_PLAIN_TEXT
-        intent.putExtra(Intent.EXTRA_TEXT, "https://calendar.ru/event?id=15325")
+        intent.putExtra(Intent.EXTRA_TEXT, url)
         startActivity(Intent.createChooser(intent, resources.getString(R.string.delete)))
     }
 
@@ -62,11 +73,5 @@ class EventModalFragment(
         val intent = Intent(context, EventActivity::class.java)
         // TODO передавать данные события (айдишника хватит)
         startActivity(intent)
-    }
-
-    private companion object {
-
-        const val MIME_PLAIN_TEXT = "plain/text"
-
     }
 }
