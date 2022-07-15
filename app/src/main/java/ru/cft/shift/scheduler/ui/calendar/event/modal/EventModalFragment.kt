@@ -5,16 +5,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.cft.shift.scheduler.EventActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentEventBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
 import ru.cft.shift.scheduler.ui.calendar.event.EventMvpPresenter
+import ru.cft.shift.scheduler.ui.event.EventActivity
+import javax.inject.Inject
 
-class EventModalFragment(val eventPresenter: EventMvpPresenter)
-    : BaseFragment<EventModalMvpPresenter>(), EventModalMvpView {
+class EventModalFragment(
+    val eventPresenter: EventMvpPresenter
+    ) : BaseFragment<EventModalMvpPresenter>(), EventModalMvpView {
 
     private lateinit var binding: FragmentEventBinding
+
+    @Inject
+    override lateinit var presenter: EventModalMvpPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        component.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +41,7 @@ class EventModalFragment(val eventPresenter: EventMvpPresenter)
         return binding.root
     }
 
-    private fun hideModalWindow() {
+    override fun hideModalWindow() {
         val fragment = parentFragmentManager.findFragmentById(R.id.modal_window)
         fragment?.let {
             val transaction = parentFragmentManager.beginTransaction()
@@ -40,7 +50,7 @@ class EventModalFragment(val eventPresenter: EventMvpPresenter)
         }
     }
 
-    private fun showShareWindow() {
+    override fun showShareWindow() {
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
         intent.type = MIME_PLAIN_TEXT
@@ -53,8 +63,6 @@ class EventModalFragment(val eventPresenter: EventMvpPresenter)
         // TODO передавать данные события (айдишника хватит)
         startActivity(intent)
     }
-
-    override fun createPresenter() = EventModalPresenter()
 
     private companion object {
 

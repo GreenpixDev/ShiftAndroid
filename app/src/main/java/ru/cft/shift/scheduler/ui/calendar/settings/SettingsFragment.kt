@@ -5,14 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.cft.shift.scheduler.MainActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentSettingsBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
+import ru.cft.shift.scheduler.ui.login.LoginActivity
+import javax.inject.Inject
 
 class SettingsFragment : BaseFragment<SettingsMvpPresenter>(), SettingsMvpView {
 
     private lateinit var binding: FragmentSettingsBinding
+
+    @Inject
+    override lateinit var presenter: SettingsMvpPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        component.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +46,7 @@ class SettingsFragment : BaseFragment<SettingsMvpPresenter>(), SettingsMvpView {
     }
 
     override fun showLoginMenu() {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
     }
-
-    override fun createPresenter() = SettingsPresenter()
 }

@@ -1,19 +1,24 @@
-package ru.cft.shift.scheduler
+package ru.cft.shift.scheduler.ui.event
 
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.CheckBox
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.*
+import ru.cft.shift.scheduler.ui.base.BaseActivity
+import javax.inject.Inject
 
-class EventActivity : AppCompatActivity() {
+class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
+
     private lateinit var binding: ActivityEventBinding
     private lateinit var bindingBottomSheetEventType: BottomSheetEventTypeBinding
     private lateinit var bindingBottomSheetDataPickerStart: BottomSheetDataPickerStartBinding
     private lateinit var bindingBottomSheetDataPickerFinish: BottomSheetDataPickerFinishBinding
     private lateinit var bindingBottomSheetColor: BottomSheetColorBinding
+
+    @Inject
+    override lateinit var presenter: EventMvpPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -253,9 +258,15 @@ class EventActivity : AppCompatActivity() {
             binding.colour.setText(choosenColor.text)
 
             when (choosenColor) {
-                bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.red))
-                bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.green))
-                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.berlin_lazur))
+                bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                    R.color.red
+                ))
+                bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                    R.color.green
+                ))
+                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                    R.color.berlin_lazur
+                ))
             }
 
             bottomSheetColor.dismiss()

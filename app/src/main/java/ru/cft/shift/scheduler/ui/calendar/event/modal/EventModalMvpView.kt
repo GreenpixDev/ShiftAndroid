@@ -6,4 +6,8 @@ interface EventModalMvpView : MvpView {
 
     fun showEventMenu()
 
+    fun showShareWindow()
+
+    fun hideModalWindow()
+
 }

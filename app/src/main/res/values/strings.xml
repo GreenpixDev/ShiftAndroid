@@ -26,8 +26,14 @@
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить</string>
 
-    <string name="PASSWORD_ERROR_MESSAGE">Пароль должен содержать строчные и прописные латинские буквы, цифры</string>
-    <string name="LOGIN_ERROR_MESSAGE">Логин должен состоять из букв и цифр, первый символ обязательно буква, ограничение 20 символов</string>
+    <string name="invalid_password">Пароль должен содержать строчные и прописные латинские буквы, цифры.</string>
+    <string name="invalid_username">Логин должен состоять из букв и цифр, первый символ обязательно буква, ограничение 20 символов.</string>
+    <string name="invalid_email">Некорректный email.</string>
+    <string name="password_not_match">Пароли не совпадают.</string>
+    <string name="bad_credentials">Неверное имя пользователя или пароль.</string>
+    <string name="connection_error">Не удалось подключиться к серверу. Попробуйте позже.</string>
+    <string name="user_exists">Пользователь с таким именем уже существует.</string>
+    <string name="email_sent">На вашу электронную почту отправлено письмо для подтверждения регистрации.</string>
 
     <string name="registration">Зарегистрироваться</string>
     <string name="login">Войти</string>

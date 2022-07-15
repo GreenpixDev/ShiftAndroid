@@ -13,6 +13,8 @@ interface CalendarMvpPresenter : MvpPresenter {
 
     fun attachYearAndMonth(year: Int, month: Int)
 
+    fun loadEvents();
+
     fun selectDay(presenter: DayMvpPresenter)
 
     fun unselectDay()
