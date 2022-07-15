@@ -18,4 +18,5 @@ interface RegistrationMvpView : MvpView {
 
     fun showLoginScreen()
 
+    fun showInvalidPasswordLenghtToast()
 }

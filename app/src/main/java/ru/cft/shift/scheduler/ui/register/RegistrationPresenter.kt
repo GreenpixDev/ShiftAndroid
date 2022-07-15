@@ -13,7 +13,7 @@ class RegistrationPresenter @Inject constructor(
     private companion object {
         val PASSWORD_REGEX = Regex("""^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*${'$'}""")
         val LOGIN_REGEX = Regex("""^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*${'$'}""")
-        val EMAIL_REGEX = Regex(""".*""") // TODO сделать норм регулярку для почты
+        val EMAIL_REGEX = Regex("""[A-zA]([A-Za-z0-9\._])+[@]([A-zA])+[.]((com)|(ru))""")
     }
 
     override fun onLoginClick() {
@@ -31,12 +31,17 @@ class RegistrationPresenter @Inject constructor(
             return
         }
 
+        if ((password.length < 8) || (password.length > 24)) {
+            view?.showInvalidPasswordLenghtToast()
+            return
+        }
+
         if (password != repeatPassword) {
             view?.showPasswordNotMatchToast()
             return
         }
 
-        if (!username.matches(EMAIL_REGEX)) {
+        if ((!email.matches(EMAIL_REGEX)) || (email.length > 50)) {
             view?.showInvalidEmailToast()
             return
         }
