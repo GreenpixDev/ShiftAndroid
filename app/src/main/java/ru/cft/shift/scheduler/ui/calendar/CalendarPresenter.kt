@@ -1,11 +1,11 @@
 package ru.cft.shift.scheduler.ui.calendar
 
 import android.util.Log
-import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.data.Month
 import ru.cft.shift.scheduler.dto.DateRequest
 import ru.cft.shift.scheduler.dto.DayRequest
 import ru.cft.shift.scheduler.dto.EventsResponse
+import ru.cft.shift.scheduler.mapper.EventResponseMapper
 import ru.cft.shift.scheduler.repository.EventRepository
 import ru.cft.shift.scheduler.ui.base.BasePresenter
 import ru.cft.shift.scheduler.ui.calendar.day.DayMvpPresenter
@@ -15,7 +15,8 @@ import ru.cft.shift.scheduler.utils.CallbackBuilder
 import javax.inject.Inject
 
 class CalendarPresenter @Inject constructor(
-    private val eventRepository: EventRepository
+    private val eventRepository: EventRepository,
+    private val eventMapper: EventResponseMapper
 ) : BasePresenter<CalendarMvpView>(), CalendarMvpPresenter {
 
     override lateinit var month: Month
@@ -63,14 +64,7 @@ class CalendarPresenter @Inject constructor(
 
                 response.body()?.let { body ->
                     body.items.forEach {
-                        view?.addEventView(Event(
-                            id = it.id,
-                            name = it.name,
-                            begin = (it.dateRequest.startDate),
-                            end = it.dateRequest.endDate,
-                            color = it.color,
-                            type = it.type
-                        ))
+                        view?.addEventView(eventMapper.map(it))
                     }
                 }
             }

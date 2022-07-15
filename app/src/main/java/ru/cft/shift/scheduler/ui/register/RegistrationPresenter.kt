@@ -32,7 +32,7 @@ class RegistrationPresenter @Inject constructor(
         }
 
         if ((password.length < 8) || (password.length > 24)) {
-            view?.showInvalidPasswordLenghtToast()
+            view?.showInvalidPasswordLengthToast()
             return
         }
 
@@ -60,6 +60,7 @@ class RegistrationPresenter @Inject constructor(
             .onResponse { _, response ->
                 if (response.isSuccessful) {
                     view?.showLoginScreen()
+                    view?.showEmailSent()
                 }
                 else {
                     view?.showUserExists()

@@ -12,12 +12,14 @@ open class BasePresenter<V : MvpView> : MvpPresenter {
 
     override fun attachView(mvpView: MvpView) {
         this.view = mvpView as V
+        onAttachView(this.view!!)
     }
 
     override fun detachView() {
         calls.forEach { it.cancel() }
         calls.clear()
         view = null
+        onDetachView()
     }
 
     protected fun <T> Call<T>.enqueueSafe(callback: Callback<T>) {
