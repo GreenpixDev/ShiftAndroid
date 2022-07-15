@@ -1,6 +1,8 @@
 package ru.cft.shift.scheduler.data
 
 import ru.cft.shift.scheduler.dto.EventColor
+import ru.cft.shift.scheduler.dto.EventType
+import java.io.Serializable
 import java.util.*
 
 data class Event(
@@ -9,5 +11,5 @@ data class Event(
     val begin: Date,
     val end: Date,
     val color: EventColor,
-    val type: String
-    )
+    val type: EventType
+    ) : Serializable

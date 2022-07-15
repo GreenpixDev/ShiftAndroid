@@ -20,6 +20,11 @@ import javax.inject.Inject
 
 class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
 
+    companion object {
+        const val MESSAGE_YEAR = "year"
+        const val MESSAGE_MONTH = "month"
+    }
+
     private lateinit var binding: ActivityCalendarBinding
 
     @Inject
@@ -127,12 +132,5 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         eventView.attachActionClickListener { showEventModalFragment(it) }
 
         binding.eventList.addView(eventView)
-    }
-
-    private companion object {
-
-        const val MESSAGE_YEAR = "year"
-        const val MESSAGE_MONTH = "month"
-
     }
 }

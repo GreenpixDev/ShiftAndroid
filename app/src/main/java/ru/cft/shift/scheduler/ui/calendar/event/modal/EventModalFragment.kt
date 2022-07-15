@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentEventBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
+import ru.cft.shift.scheduler.ui.calendar.CalendarActivity
 import ru.cft.shift.scheduler.ui.calendar.event.EventMvpPresenter
 import ru.cft.shift.scheduler.ui.event.EventActivity
 import javax.inject.Inject
@@ -58,7 +59,7 @@ class EventModalFragment(
     }
 
     override fun removeEvent() {
-        eventPresenter.remove();
+        eventPresenter.remove()
     }
 
     override fun showShareWindow(url: String) {
@@ -71,7 +72,10 @@ class EventModalFragment(
 
     override fun showEventMenu() {
         val intent = Intent(context, EventActivity::class.java)
-        // TODO передавать данные события (айдишника хватит)
+        val month = (context as CalendarActivity).presenter.month
+        intent.putExtra(EventActivity.MESSAGE_EVENT_ID, eventId)
+        intent.putExtra(CalendarActivity.MESSAGE_YEAR, month.yearNumber)
+        intent.putExtra(CalendarActivity.MESSAGE_MONTH, month.monthNumber)
         startActivity(intent)
     }
 }

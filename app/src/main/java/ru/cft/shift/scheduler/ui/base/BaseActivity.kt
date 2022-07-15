@@ -49,7 +49,10 @@ abstract class BaseActivity<P : MvpPresenter> : AppCompatActivity(), MvpView {
 
     override fun startActivity(intent: Intent?) {
         if (this.intent.hasExtra(MESSAGE_JWT_TOKEN)) {
-            intent?.putExtra(MESSAGE_JWT_TOKEN, this.intent.getStringExtra(MESSAGE_JWT_TOKEN))
+            intent?.putExtra(
+                MESSAGE_JWT_TOKEN,
+                this.intent.getStringExtra(MESSAGE_JWT_TOKEN)
+            )
         }
         super.startActivity(intent)
     }

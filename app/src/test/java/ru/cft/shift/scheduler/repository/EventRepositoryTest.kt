@@ -19,7 +19,7 @@ class EventRepositoryTest {
         val DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sss")
 
         const val NAME = "test"
-        val TYPE = EventType.MEETING
+        const val TYPE = "meeting"
         val COLOR = EventColor.RED
         val UPDATED_COLOR = EventColor.BLUE
         val DATE = DayRequest(DATE_FORMAT.parse("2022-07-14T14:27:14.812"))
