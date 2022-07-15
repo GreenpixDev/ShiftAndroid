@@ -1,15 +1,28 @@
 package ru.cft.shift.scheduler.ui.event
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import ru.cft.shift.scheduler.R
+import ru.cft.shift.scheduler.data.Event
+import ru.cft.shift.scheduler.data.Month
 import ru.cft.shift.scheduler.databinding.*
+import ru.cft.shift.scheduler.dto.EventColor
+import ru.cft.shift.scheduler.dto.EventType
 import ru.cft.shift.scheduler.ui.base.BaseActivity
+import ru.cft.shift.scheduler.ui.calendar.CalendarActivity
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
+
+    companion object {
+        const val MESSAGE_EVENT_ID = "eventId"
+        val DATE_FORMAT = SimpleDateFormat("E, d MMM")
+    }
 
     private lateinit var binding: ActivityEventBinding
     private lateinit var bindingBottomSheetEventType: BottomSheetEventTypeBinding
@@ -20,8 +33,41 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
     @Inject
     override lateinit var presenter: EventMvpPresenter
 
+    private var month: Month? = null
+
+    private val startDate = Calendar.getInstance()
+    private val finishDate = Calendar.getInstance()
+    private val newStartDate = Calendar.getInstance()
+    private val newFinishDate = Calendar.getInstance()
+
+    override val eventId: Long?
+        get() = if (intent.hasExtra(MESSAGE_EVENT_ID)) {
+            intent.getLongExtra(MESSAGE_EVENT_ID, 0L)
+        } else {
+            null
+        }
+
+    override fun update(event: Event) {
+        startDate.time = event.begin
+        finishDate.time = event.end
+
+        binding.eventName.setText(event.name)
+        binding.timeStart.text = DATE_FORMAT.format(event.begin)
+        binding.timeFinish.text = DATE_FORMAT.format(event.end)
+        // TODO обновлять цвет в UI
+        // TODO обновлять тип в UI
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        component.inject(this)
+
+        if (intent.hasExtra(CalendarActivity.MESSAGE_YEAR) && intent.hasExtra(CalendarActivity.MESSAGE_MONTH)) {
+            month = Month(
+                monthNumber = intent.getIntExtra(CalendarActivity.MESSAGE_MONTH, 0),
+                yearNumber = intent.getIntExtra(CalendarActivity.MESSAGE_YEAR, 0)
+            )
+        }
 
         binding = ActivityEventBinding.inflate(layoutInflater)
         bindingBottomSheetEventType = BottomSheetEventTypeBinding.inflate(layoutInflater)
@@ -57,7 +103,8 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             bottomSheetColor.show()
         }
 
-        binding.closeButton.setOnClickListener { closeActivity() }
+        binding.closeButton.setOnClickListener { showCalendarScreen() }
+        binding.checkmarkButton.setOnClickListener { onCreateOrUpdateEvent() }
 
         var choosenType = bindingBottomSheetEventType.checkBox
 
@@ -122,12 +169,14 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         bindingBottomSheetDataPickerStart.data.setOnValueChangedListener { numberPicker, i, i2 ->
             val i = numberPicker.value
             date = str[i]
+            // TODO синхронизировать с датой startDate.set(Calendar.DAY_OF_YEAR, что-то)
 
             bindingBottomSheetDataPickerStart.liveDate.setText(date + ' ' + year.toString()  + ' ' + hour + ':' + minute)
         }
 
         bindingBottomSheetDataPickerStart.hour.setOnValueChangedListener { numberPicker, i, i2 ->
             hour = numberPicker.value.toString()
+            newStartDate.set(Calendar.HOUR, minute.toInt())
 
             if (hour.length == 1) {
                 hour = '0' + hour
@@ -138,6 +187,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
 
         bindingBottomSheetDataPickerStart.minute.setOnValueChangedListener { numberPicker, i, i2 ->
             minute = numberPicker.value.toString()
+            newStartDate.set(Calendar.MINUTE, minute.toInt())
 
             if (minute.length == 1){
                 minute = '0' + minute
@@ -175,6 +225,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         bindingBottomSheetDataPickerFinish.data.setOnValueChangedListener { numberPicker, i, i2 ->
             val i = numberPicker.value
             date2 = str2[i]
+            // TODO синхронизировать с датой finishDate.set(Calendar.DAY_OF_YEAR, что-то)
 
             bindingBottomSheetDataPickerFinish.liveDate.setText(date2 + ' ' + year2.toString()  + ' ' + hour2 + ':' + minute2)
 
@@ -182,6 +233,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
 
         bindingBottomSheetDataPickerFinish.hour.setOnValueChangedListener { numberPicker, i, i2 ->
             hour2 = numberPicker.value.toString()
+            newFinishDate.set(Calendar.HOUR, minute.toInt())
 
             if (hour2.length == 1){
                 hour2 = '0' + hour2
@@ -192,6 +244,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
 
         bindingBottomSheetDataPickerFinish.minute.setOnValueChangedListener { numberPicker, i, i2 ->
             minute2 = numberPicker.value.toString()
+            newFinishDate.set(Calendar.MINUTE, minute.toInt())
 
             if (minute2.length == 1){
                 minute2 = '0' + minute2
@@ -277,8 +330,24 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         }
     }
 
-    private fun closeActivity() {
-        finish()
+    override fun showCalendarScreen() {
+        val intent = Intent(this, CalendarActivity::class.java)
+        if (month != null) {
+            intent.putExtra(CalendarActivity.MESSAGE_YEAR, month!!.yearNumber)
+            intent.putExtra(CalendarActivity.MESSAGE_MONTH, month!!.monthNumber)
+        }
+        startActivity(intent)
+    }
+
+    private fun onCreateOrUpdateEvent() {
+        presenter.createOrUpdate(Event(
+            id = 0,
+            name = binding.eventName.text.toString(),
+            begin = startDate.time,
+            end = finishDate.time,
+            color = EventColor.YELLOW, // TODO убрать заглушку
+            type = EventType.EVENT // TODO убрать заглушку
+        ))
     }
 
 }

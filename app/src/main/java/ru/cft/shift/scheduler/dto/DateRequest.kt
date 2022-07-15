@@ -1,8 +1,10 @@
 package ru.cft.shift.scheduler.dto
 
+import java.util.*
+
 data class DateRequest(
-    val startDate: String,
-    val endDate: String
+    val startDate: Date,
+    val endDate: Date
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

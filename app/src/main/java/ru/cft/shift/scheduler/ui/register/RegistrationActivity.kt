@@ -56,7 +56,7 @@ class RegistrationActivity : BaseActivity<RegistrationMvpPresenter>(), Registrat
         ).show()
     }
 
-    override fun showInvalidPasswordLenghtToast() {
+    override fun showInvalidPasswordLengthToast() {
         Toast.makeText(
             this,
             R.string.invalid_password_lenght,
@@ -99,7 +99,9 @@ class RegistrationActivity : BaseActivity<RegistrationMvpPresenter>(), Registrat
     override fun showLoginScreen() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+    }
 
+    override fun showEmailSent() {
         Toast.makeText(
             this,
             R.string.email_sent,

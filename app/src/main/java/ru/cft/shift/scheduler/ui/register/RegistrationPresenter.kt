@@ -7,7 +7,7 @@ import ru.cft.shift.scheduler.utils.CallbackBuilder
 import javax.inject.Inject
 
 class RegistrationPresenter @Inject constructor(
-    val authRepository: AuthRepository
+    private val authRepository: AuthRepository
 ) : BasePresenter<RegistrationMvpView>(), RegistrationMvpPresenter {
 
     private companion object {
@@ -32,7 +32,7 @@ class RegistrationPresenter @Inject constructor(
         }
 
         if ((password.length < 8) || (password.length > 24)) {
-            view?.showInvalidPasswordLenghtToast()
+            view?.showInvalidPasswordLengthToast()
             return
         }
 
@@ -65,6 +65,7 @@ class RegistrationPresenter @Inject constructor(
             .onResponse { _, response ->
                 if (response.isSuccessful) {
                     view?.showLoginScreen()
+                    view?.showEmailSent()
                 }
                 else {
                     view?.showUserExists()

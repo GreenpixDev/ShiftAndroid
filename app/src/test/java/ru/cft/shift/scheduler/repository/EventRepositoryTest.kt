@@ -8,6 +8,7 @@ import org.junit.Test
 import ru.cft.shift.scheduler.di.component.DaggerTestRetrofitComponent
 import ru.cft.shift.scheduler.dto.*
 import java.net.HttpURLConnection
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -15,12 +16,17 @@ class EventRepositoryTest {
 
     private companion object {
 
+        val DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sss")
+
         const val NAME = "test"
-        val TYPE = EventType.MEETING
+        const val TYPE = "meeting"
         val COLOR = EventColor.RED
         val UPDATED_COLOR = EventColor.BLUE
-        val DATE = DayRequest("2022-07-14T14:27:14.812Z")
-        val PERIOD = DateRequest("2022-07-14T14:27:14.812Z", "2022-07-14T14:27:18.812Z")
+        val DATE = DayRequest(DATE_FORMAT.parse("2022-07-14T14:27:14.812"))
+        val PERIOD = DateRequest(
+            startDate = DATE_FORMAT.parse("2022-07-14T14:27:14.812"),
+            endDate = DATE_FORMAT.parse("2022-07-14T14:27:18.812")
+        )
 
     }
 

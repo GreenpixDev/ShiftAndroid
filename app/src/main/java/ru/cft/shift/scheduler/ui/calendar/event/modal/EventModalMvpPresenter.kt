@@ -4,6 +4,12 @@ import ru.cft.shift.scheduler.ui.base.MvpPresenter
 
 interface EventModalMvpPresenter : MvpPresenter {
 
-    fun onDeleteEvent()
+    val eventId: Long?
+
+    fun onShareClick()
+
+    fun onDeleteEventClick()
+
+    fun onEditEventClick()
 
 }

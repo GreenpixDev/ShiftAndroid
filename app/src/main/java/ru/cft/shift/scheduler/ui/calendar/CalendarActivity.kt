@@ -20,6 +20,11 @@ import javax.inject.Inject
 
 class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
 
+    companion object {
+        const val MESSAGE_YEAR = "year"
+        const val MESSAGE_MONTH = "month"
+    }
+
     private lateinit var binding: ActivityCalendarBinding
 
     @Inject
@@ -71,8 +76,16 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         }
         binding.month.text = "$year ${DateFormatSymbols().months[month]}"
 
-        presenter.attachYearAndMonth(year, month)
+        presenter.attachMonth(year, month)
         presenter.loadEvents()
+    }
+
+    override fun reloadCalendar() {
+        val intent = Intent(this, CalendarActivity::class.java).apply {
+            putExtra(MESSAGE_YEAR, presenter.month.yearNumber)
+            putExtra(MESSAGE_MONTH, presenter.month.monthNumber)
+        }
+        startActivity(intent)
     }
 
     override fun showCalendar(year: Int, month: Int) {
@@ -115,16 +128,9 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
     override fun addEventView(event: Event) {
         val eventView = EventView(this)
         eventView.style(R.style.Calendar_Event)
-        eventView.updateMark(event.mark)
+        eventView.update(event)
         eventView.attachActionClickListener { showEventModalFragment(it) }
 
         binding.eventList.addView(eventView)
-    }
-
-    private companion object {
-
-        const val MESSAGE_YEAR = "year"
-        const val MESSAGE_MONTH = "month"
-
     }
 }

@@ -36,8 +36,9 @@ class LoginActivity : BaseActivity<LoginMvpPresenter>(), LoginMvpView {
         startActivity(intent)
     }
 
-    override fun showCalendarScreen() {
+    override fun showCalendarScreen(jwtToken: String?) {
         val intent = Intent(this, CalendarActivity::class.java)
+        intent.putExtra(MESSAGE_JWT_TOKEN, jwtToken)
         startActivity(intent)
     }
 

@@ -10,6 +10,6 @@ interface LoginMvpView : MvpView {
 
     fun showRegistrationScreen()
 
-    fun showCalendarScreen()
+    fun showCalendarScreen(jwtToken: String?)
 
 }
