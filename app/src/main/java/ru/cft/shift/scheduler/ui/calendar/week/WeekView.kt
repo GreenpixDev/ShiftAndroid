@@ -40,6 +40,7 @@ class WeekView @JvmOverloads constructor(
             val dayView = get(column) as DayView
 
             presenter.dayPresenters.add(dayView.presenter)
+            dayView.presenter.attachDay(date)
             dayView.attachClickListener(dayClickListener)
 
             dayView.updateDayNumber(date.get(Calendar.DAY_OF_MONTH))
