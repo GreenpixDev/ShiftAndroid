@@ -255,7 +255,7 @@ class EventActivity : AppCompatActivity() {
             when (choosenColor) {
                 bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.red))
                 bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.green))
-                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.blue))
+                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.berlin_lazur))
             }
 
             bottomSheetColor.dismiss()

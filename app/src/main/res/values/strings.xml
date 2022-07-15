@@ -4,6 +4,8 @@
     <string name="textRegistration">У вас нет аккаунта?</string>
     <string name="event_tittle">Событие</string>
     <string name="event_name">Название события</string>
+    <string name="event_start">Начало</string>
+    <string name="event_finish">Окончание</string>
 
     <string name="example_year_and_month">2022 Июль</string>
     <string name="example_week_number">1</string>
