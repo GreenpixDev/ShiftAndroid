@@ -220,7 +220,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             }
 
             else{
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#42AAFF"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
             }
         }
 

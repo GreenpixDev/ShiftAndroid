@@ -7,13 +7,49 @@
     tools:context=".ui.login.LoginActivity"
     >
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/cyan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="1">
+
+        <TextView
+            android:id="@+id/tittle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/login_account"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:autoSizePresetSizes="@array/autosize_text_sizes"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.45" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutLogin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:counterEnabled="true"
-        app:counterMaxLength="20"
+        app:counterMaxLength="24"
         app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,9 +107,11 @@
         android:id="@+id/buttonInput"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:backgroundTint="@color/cyan"
         android:text="@string/login"
         app:autoSizePresetSizes="@array/autosize_text_sizes"
         app:autoSizeTextType="uniform"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPassword"
         app:layout_constraintHeight_default="percent"
@@ -107,8 +145,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/registration"
+        android:backgroundTint="@color/cyan"
         app:autoSizePresetSizes="@array/autosize_text_sizes"
         app:autoSizeTextType="uniform"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHeight_default="percent"
