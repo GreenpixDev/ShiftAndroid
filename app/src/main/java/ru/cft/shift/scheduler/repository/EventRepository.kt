@@ -6,9 +6,9 @@ import ru.cft.shift.scheduler.dto.*
 
 interface EventRepository {
 
-    @GET("/api/calendar/{id}")
+    @GET("/api/calendar/get/")
     fun findById(
-        @Path("id") id: Long
+        @Query("id_event") id: Long
     ): Call<EventInfoResponse>
 
     @POST("/api/calendar/day")
@@ -26,15 +26,15 @@ interface EventRepository {
         @Body event: EventInfoRequest
     ): Call<EventInfoResponse>
 
-    @PUT("/api/calendar/{id}/change")
+    @PUT("/api/calendar/change")
     fun update(
-        @Path("id") id: Long,
+        @Query("id_event") id: Long,
         @Body event: EventInfoRequest
     ): Call<Void>
 
-    @DELETE("/api/calendar/{id}/delete")
+    @DELETE("/api/calendar/delete")
     fun delete(
-        @Path("id") id: Long
+        @Query("id_event") id: Long
     ): Call<Void>
 
 }

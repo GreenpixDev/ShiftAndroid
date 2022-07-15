@@ -6,10 +6,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import ru.cft.shift.scheduler.di.component.DaggerTestRetrofitComponent
-import ru.cft.shift.scheduler.dto.DateRequest
-import ru.cft.shift.scheduler.dto.DayRequest
-import ru.cft.shift.scheduler.dto.EventInfoRequest
-import ru.cft.shift.scheduler.dto.LoginRequest
+import ru.cft.shift.scheduler.dto.*
 import java.net.HttpURLConnection
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -19,9 +16,9 @@ class EventRepositoryTest {
     private companion object {
 
         const val NAME = "test"
-        const val DESCRIPTION = "test's description"
-        const val UPDATED_DESCRIPTION = "updated test's description"
-
+        val TYPE = EventType.MEETING
+        val COLOR = EventColor.RED
+        val UPDATED_COLOR = EventColor.BLUE
         val DATE = DayRequest("2022-07-14T14:27:14.812Z")
         val PERIOD = DateRequest("2022-07-14T14:27:14.812Z", "2022-07-14T14:27:18.812Z")
 
@@ -40,7 +37,8 @@ class EventRepositoryTest {
         val response = eventRepository.create(EventInfoRequest(
             dateRequest = PERIOD,
             name = NAME,
-            description = DESCRIPTION
+            type = TYPE,
+            color = COLOR
         )).execute()
         assertEquals(HttpURLConnection.HTTP_OK, response.code())
         assertNotNull(response.body())
@@ -58,7 +56,8 @@ class EventRepositoryTest {
         val responseUpdate = eventRepository.update(eventId, EventInfoRequest(
             dateRequest = PERIOD,
             name = NAME,
-            description = UPDATED_DESCRIPTION
+            type = TYPE,
+            color = UPDATED_COLOR
         )).execute()
         assertEquals(HttpURLConnection.HTTP_OK, responseUpdate.code())
     }
