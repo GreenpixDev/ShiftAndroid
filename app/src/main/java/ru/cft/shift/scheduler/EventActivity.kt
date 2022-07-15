@@ -3,6 +3,7 @@ package ru.cft.shift.scheduler
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import ru.cft.shift.scheduler.databinding.*
@@ -53,7 +54,6 @@ class EventActivity : AppCompatActivity() {
 
         binding.closeButton.setOnClickListener { closeActivity() }
 
-
         var choosenType = bindingBottomSheetEventType.checkBox
 
         bindingBottomSheetEventType.checkBox.setOnClickListener {
@@ -98,6 +98,7 @@ class EventActivity : AppCompatActivity() {
         }
 
         val str = arrayOf<String>("СР, 6 Июля","ЧТ, 7 Июля", "ПТ, 8 Июля")
+
         bindingBottomSheetDataPickerStart.data.minValue = 0
         bindingBottomSheetDataPickerStart.data.maxValue = str.size - 1
         bindingBottomSheetDataPickerStart.data.displayedValues = str
@@ -118,13 +119,12 @@ class EventActivity : AppCompatActivity() {
             date = str[i]
 
             bindingBottomSheetDataPickerStart.liveDate.setText(date + ' ' + year.toString()  + ' ' + hour + ':' + minute)
-
         }
 
         bindingBottomSheetDataPickerStart.hour.setOnValueChangedListener { numberPicker, i, i2 ->
             hour = numberPicker.value.toString()
 
-            if (hour.length == 1){
+            if (hour.length == 1) {
                 hour = '0' + hour
             }
 
@@ -151,6 +151,7 @@ class EventActivity : AppCompatActivity() {
         }
 
         val str2 = arrayOf<String>("СР, 6 Июля","ЧТ, 7 Июля", "ПТ, 8 Июля")
+
         bindingBottomSheetDataPickerFinish.data.minValue = 0
         bindingBottomSheetDataPickerFinish.data.maxValue = str2.size - 1
         bindingBottomSheetDataPickerFinish.data.displayedValues = str2
@@ -209,7 +210,7 @@ class EventActivity : AppCompatActivity() {
             if (bindingBottomSheetColor.checkBox.isChecked){
                 bindingBottomSheetColor.checkBox2.isChecked = false
                 bindingBottomSheetColor.checkBox3.isChecked = false
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#FF0000"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.red))
                 choosenColor = bindingBottomSheetColor.checkBox
             }
 
@@ -222,13 +223,13 @@ class EventActivity : AppCompatActivity() {
             if (bindingBottomSheetColor.checkBox2.isChecked){
                 bindingBottomSheetColor.checkBox.isChecked = false
                 bindingBottomSheetColor.checkBox3.isChecked = false
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#1E5945"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.green))
 
                 choosenColor = bindingBottomSheetColor.checkBox2
             }
 
             else{
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#42AAFF"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
                 choosenColor = bindingBottomSheetColor.checkBox
             }
         }
@@ -237,13 +238,13 @@ class EventActivity : AppCompatActivity() {
             if (bindingBottomSheetColor.checkBox3.isChecked){
                 bindingBottomSheetColor.checkBox.isChecked = false
                 bindingBottomSheetColor.checkBox2.isChecked = false
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#003153"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.berlin_lazur))
 
                 choosenColor = bindingBottomSheetColor.checkBox3
             }
 
             else{
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#42AAFF"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
                 choosenColor = bindingBottomSheetColor.checkBox
             }
         }
@@ -252,9 +253,9 @@ class EventActivity : AppCompatActivity() {
             binding.colour.setText(choosenColor.text)
 
             when (choosenColor) {
-                bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF0000"))
-                bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#1E5945"))
-                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#003153"))
+                bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.red))
+                bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.green))
+                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(R.color.berlin_lazur))
             }
 
             bottomSheetColor.dismiss()

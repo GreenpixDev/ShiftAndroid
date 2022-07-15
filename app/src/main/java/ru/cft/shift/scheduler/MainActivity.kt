@@ -11,15 +11,19 @@ import androidx.core.view.GestureDetectorCompat
 import com.google.android.material.textfield.TextInputLayout
 import ru.cft.shift.scheduler.databinding.ActivityMainBinding
 
-private lateinit var binding: ActivityMainBinding
-//private lateinit var detector: GestureDetectorCompat
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
+    private companion object {
+        val PASSWORD_REGEX = Regex("""^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*${'$'}""")
+        val LOGIN_REGEX = Regex("""^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*${'$'}""")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         binding.buttonInput.setOnClickListener {
@@ -27,47 +31,41 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonInviteToRegistration.setOnClickListener {
-            var intent = Intent(MainActivity@this, RegistrationActivity::class.java)
-            startActivity(intent)
+            intentToRegisrationActivity()
         }
-
-
     }
 
     private fun dataChecker() {
-        """^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*${'$'}""".toRegex() //регулярка для пароля
-        """^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}${'$'}""".toRegex() //регулярка для логина
+        val passwordString = binding.password.text.toString()
+        val loginString = binding.login.text.toString()
 
-        var passwordString = binding.password.text.toString()
-        var loginString = binding.login.text.toString()
-
-        if ((!passwordString.matches(Regex("""^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*${'$'}""")))) {
+        if (!passwordString.matches(PASSWORD_REGEX)) {
             val passwordErrorToast = Toast.makeText(
                 this,
-                "Пароль должен содержать строчные и прописные латинские буквы, цифры",
+                R.string.PASSWORD_ERROR_MESSAGE,
                 Toast.LENGTH_LONG
             )
             passwordErrorToast.setGravity(Gravity.TOP, 0, 0)
             passwordErrorToast.show()
+
+            return
         }
 
-        if ((!loginString.matches(Regex("""^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}${'$'}""")))) {
+        if (!loginString.matches(LOGIN_REGEX)) {
             val loginErrorToast = Toast.makeText(
                 this,
-                "Логин должен состоять из букв и цифр, первый символ обязательно буква, ограничение 20 символов",
+                R.string.LOGIN_ERROR_MESSAGE,
                 Toast.LENGTH_LONG
             )
 
             loginErrorToast.setGravity(Gravity.TOP, 0, 0)
             loginErrorToast.show()
         }
-
     }
 
-
-
+    private fun intentToRegisrationActivity() {
+        val intent = Intent(MainActivity@this, RegistrationActivity::class.java)
+        startActivity(intent)
+    }
 }
 
-private fun TextInputLayout.onSwipeRight() {
-    binding.password.setText("")
-}

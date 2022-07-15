@@ -15,10 +15,12 @@ class RegistrationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonBack.setOnClickListener {
-            var intent = Intent(RegistrationActivity@this, MainActivity::class.java)
-            startActivity(intent)
+            intentToLoginActivity()
         }
+    }
 
-
+    private fun intentToLoginActivity() {
+        var intent = Intent(RegistrationActivity@this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
