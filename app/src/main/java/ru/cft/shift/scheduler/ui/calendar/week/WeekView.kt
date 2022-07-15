@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.TableRow
 import androidx.core.view.get
 import ru.cft.shift.scheduler.databinding.ItemWeekBinding
+import ru.cft.shift.scheduler.ui.calendar.CalendarActivity
 import ru.cft.shift.scheduler.ui.calendar.day.DayMvpPresenter
 import ru.cft.shift.scheduler.ui.calendar.day.DayView
 import java.util.*
@@ -42,6 +43,7 @@ class WeekView @JvmOverloads constructor(
             presenter.dayPresenters.add(dayView.presenter)
             dayView.presenter.attachDay(date)
             dayView.attachClickListener(dayClickListener)
+            (context as CalendarActivity).presenter.attachDay(dayView.presenter)
 
             dayView.updateDayNumber(date.get(Calendar.DAY_OF_MONTH))
             dayView.updateIsWeekend(column == 7)

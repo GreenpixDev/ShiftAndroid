@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import ru.cft.shift.scheduler.R
+import ru.cft.shift.scheduler.data.Day
 import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.data.Month
 import ru.cft.shift.scheduler.databinding.*
@@ -22,6 +23,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
     companion object {
         const val MESSAGE_EVENT_ID = "eventId"
         val DATE_FORMAT = SimpleDateFormat("E, d MMM")
+        val DATE_TIME_FORMAT = SimpleDateFormat("E, d MMM yyyy HH:mm")
     }
 
     private lateinit var binding: ActivityEventBinding
@@ -33,12 +35,16 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
     @Inject
     override lateinit var presenter: EventMvpPresenter
 
-    private var month: Month? = null
+    override var day: Day? = null
+
+    private lateinit var month: Month
 
     private val startDate = Calendar.getInstance()
     private val finishDate = Calendar.getInstance()
     private val newStartDate = Calendar.getInstance()
     private val newFinishDate = Calendar.getInstance()
+
+    private val dayList = mutableListOf<String>()
 
     override val eventId: Long?
         get() = if (intent.hasExtra(MESSAGE_EVENT_ID)) {
@@ -51,21 +57,64 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         startDate.time = event.begin
         finishDate.time = event.end
 
-        binding.eventName.setText(event.name)
-        binding.timeStart.text = DATE_FORMAT.format(event.begin)
-        binding.timeFinish.text = DATE_FORMAT.format(event.end)
-        // TODO обновлять цвет в UI
-        // TODO обновлять тип в UI
+        if (event.name.isNotBlank()) {
+            binding.eventName.setText(event.name)
+        }
+        binding.timeStart.text = DATE_TIME_FORMAT.format(event.begin)
+        binding.timeFinish.text = DATE_TIME_FORMAT.format(event.end)
+
+        bindingBottomSheetDataPickerStart.data.value = startDate.get(Calendar.DAY_OF_MONTH) - 1
+        bindingBottomSheetDataPickerStart.hour.value = startDate.get(Calendar.HOUR_OF_DAY)
+        bindingBottomSheetDataPickerStart.minute.value = startDate.get(Calendar.MINUTE)
+        bindingBottomSheetDataPickerStart.liveDate.text = DATE_TIME_FORMAT.format(startDate.time)
+
+        bindingBottomSheetDataPickerFinish.data.value = finishDate.get(Calendar.DAY_OF_MONTH) - 1
+        bindingBottomSheetDataPickerFinish.hour.value = finishDate.get(Calendar.HOUR_OF_DAY)
+        bindingBottomSheetDataPickerFinish.minute.value = finishDate.get(Calendar.MINUTE)
+        bindingBottomSheetDataPickerFinish.liveDate.text = DATE_TIME_FORMAT.format(finishDate.time)
+
+        when (event.color){
+            EventColor.YELLOW -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                resources.getColor(
+                R.color.mark_light_yellow))
+            EventColor.BLUE -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                resources.getColor(
+                R.color.blue))
+            EventColor.GRAY -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                resources.getColor(
+                R.color.light_gray))
+            EventColor.GREEN -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                resources.getColor(
+                R.color.green))
+            EventColor.RED -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                resources.getColor(
+                R.color.red))
+            EventColor.VIOLET -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                resources.getColor(
+                R.color.mark_dark_violet))
+        }
+
+        /*when (event.type) { TODO
+            EventType.EVENT -> binding.type.setText(R.string.event)
+            EventType.GOAL ->  binding.type.setText(R.string.goal)
+            EventType.MEETING -> binding.type.setText(R.string.meeting)
+        }*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         component.inject(this)
 
-        if (intent.hasExtra(CalendarActivity.MESSAGE_YEAR) && intent.hasExtra(CalendarActivity.MESSAGE_MONTH)) {
-            month = Month(
-                monthNumber = intent.getIntExtra(CalendarActivity.MESSAGE_MONTH, 0),
-                yearNumber = intent.getIntExtra(CalendarActivity.MESSAGE_YEAR, 0)
+        month = Month(
+            monthNumber = intent.getIntExtra(CalendarActivity.MESSAGE_MONTH, 0),
+            yearNumber = intent.getIntExtra(CalendarActivity.MESSAGE_YEAR, 2000)
+        )
+
+        if (intent.hasExtra(CalendarActivity.MESSAGE_DAY)) {
+            day = Day(
+                monthNumber = month.monthNumber,
+                yearNumber = month.yearNumber,
+                dayNumber = intent.getIntExtra(CalendarActivity.MESSAGE_DAY, 1)
             )
         }
 
@@ -141,7 +190,7 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         }
 
         bindingBottomSheetEventType.buttonOK.setOnClickListener {
-            binding.type.setText(choosenType.text.toString())
+            binding.type.text = choosenType.text.toString()
             bottomSheetDialog.dismiss()
         }
 
@@ -149,11 +198,15 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             bottomSheetDialog.dismiss()
         }
 
-        val str = arrayOf<String>("СР, 6 Июля","ЧТ, 7 Июля", "ПТ, 8 Июля")
+        val calDate = month.calendar
+        while (calDate.get(Calendar.MONTH) == month.monthNumber) {
+            dayList.add(DATE_FORMAT.format(calDate.time))
+            calDate.add(Calendar.DAY_OF_YEAR, 1)
+        }
 
         bindingBottomSheetDataPickerStart.data.minValue = 0
-        bindingBottomSheetDataPickerStart.data.maxValue = str.size - 1
-        bindingBottomSheetDataPickerStart.data.displayedValues = str
+        bindingBottomSheetDataPickerStart.data.maxValue = dayList.size - 1
+        bindingBottomSheetDataPickerStart.data.displayedValues = dayList.toTypedArray()
 
         bindingBottomSheetDataPickerStart.hour.minValue = 0
         bindingBottomSheetDataPickerStart.hour.maxValue = 23
@@ -161,43 +214,25 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         bindingBottomSheetDataPickerStart.minute.minValue = 0
         bindingBottomSheetDataPickerStart.minute.maxValue = 59
 
-        var date = "СР, 6 июля"
-        var hour = "00"
-        var minute = "00"
-        var year = 2022
-
-        bindingBottomSheetDataPickerStart.data.setOnValueChangedListener { numberPicker, i, i2 ->
-            val i = numberPicker.value
-            date = str[i]
-            // TODO синхронизировать с датой startDate.set(Calendar.DAY_OF_YEAR, что-то)
-
-            bindingBottomSheetDataPickerStart.liveDate.setText(date + ' ' + year.toString()  + ' ' + hour + ':' + minute)
+        // Дата начала
+        bindingBottomSheetDataPickerStart.data.setOnValueChangedListener { numberPicker, _, _ ->
+            newStartDate.set(Calendar.DAY_OF_MONTH, numberPicker.value + 1)
+            bindingBottomSheetDataPickerStart.liveDate.text = DATE_TIME_FORMAT.format(newStartDate.time)
         }
 
-        bindingBottomSheetDataPickerStart.hour.setOnValueChangedListener { numberPicker, i, i2 ->
-            hour = numberPicker.value.toString()
-            newStartDate.set(Calendar.HOUR, minute.toInt())
-
-            if (hour.length == 1) {
-                hour = '0' + hour
-            }
-
-            bindingBottomSheetDataPickerStart.liveDate.setText(date + ' ' + year.toString()  + ' ' + hour + ':' + minute)
+        bindingBottomSheetDataPickerStart.hour.setOnValueChangedListener { numberPicker, _, _ ->
+            newStartDate.set(Calendar.HOUR_OF_DAY, numberPicker.value)
+            bindingBottomSheetDataPickerStart.liveDate.text = DATE_TIME_FORMAT.format(newStartDate.time)
         }
 
-        bindingBottomSheetDataPickerStart.minute.setOnValueChangedListener { numberPicker, i, i2 ->
-            minute = numberPicker.value.toString()
-            newStartDate.set(Calendar.MINUTE, minute.toInt())
-
-            if (minute.length == 1){
-                minute = '0' + minute
-            }
-
-            bindingBottomSheetDataPickerStart.liveDate.setText(date + ' ' + year.toString()  + ' ' + hour + ':' + minute)
+        bindingBottomSheetDataPickerStart.minute.setOnValueChangedListener { numberPicker, _, _ ->
+            newStartDate.set(Calendar.MINUTE, numberPicker.value)
+            bindingBottomSheetDataPickerStart.liveDate.text = DATE_TIME_FORMAT.format(newStartDate.time)
         }
 
         bindingBottomSheetDataPickerStart.buttonOK.setOnClickListener {
-            binding.timeStart.setText(bindingBottomSheetDataPickerStart.liveDate.text)
+            binding.timeStart.text = bindingBottomSheetDataPickerStart.liveDate.text
+            startDate.time = newStartDate.time
             bottomSheetDataPickerStart.dismiss()
         }
 
@@ -205,11 +240,9 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             bottomSheetDataPickerStart.dismiss()
         }
 
-        val str2 = arrayOf<String>("СР, 6 Июля","ЧТ, 7 Июля", "ПТ, 8 Июля")
-
         bindingBottomSheetDataPickerFinish.data.minValue = 0
-        bindingBottomSheetDataPickerFinish.data.maxValue = str2.size - 1
-        bindingBottomSheetDataPickerFinish.data.displayedValues = str2
+        bindingBottomSheetDataPickerFinish.data.maxValue = dayList.size - 1
+        bindingBottomSheetDataPickerFinish.data.displayedValues = dayList.toTypedArray()
 
         bindingBottomSheetDataPickerFinish.hour.minValue = 0
         bindingBottomSheetDataPickerFinish.hour.maxValue = 23
@@ -217,44 +250,25 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
         bindingBottomSheetDataPickerFinish.minute.minValue = 0
         bindingBottomSheetDataPickerFinish.minute.maxValue = 59
 
-        var date2 = "СР, 6 июля"
-        var hour2 = "00"
-        var minute2 = "00"
-        var year2 = 2022
-
-        bindingBottomSheetDataPickerFinish.data.setOnValueChangedListener { numberPicker, i, i2 ->
-            val i = numberPicker.value
-            date2 = str2[i]
-            // TODO синхронизировать с датой finishDate.set(Calendar.DAY_OF_YEAR, что-то)
-
-            bindingBottomSheetDataPickerFinish.liveDate.setText(date2 + ' ' + year2.toString()  + ' ' + hour2 + ':' + minute2)
-
+        // Дата конца
+        bindingBottomSheetDataPickerFinish.data.setOnValueChangedListener { numberPicker, _, _ ->
+            newFinishDate.set(Calendar.DAY_OF_MONTH, numberPicker.value + 1)
+            bindingBottomSheetDataPickerFinish.liveDate.text = DATE_TIME_FORMAT.format(newFinishDate.time)
         }
 
-        bindingBottomSheetDataPickerFinish.hour.setOnValueChangedListener { numberPicker, i, i2 ->
-            hour2 = numberPicker.value.toString()
-            newFinishDate.set(Calendar.HOUR, minute.toInt())
-
-            if (hour2.length == 1){
-                hour2 = '0' + hour2
-            }
-
-            bindingBottomSheetDataPickerFinish.liveDate.setText(date2 + ' ' + year2.toString()  + ' ' + hour2 + ':' + minute2)
+        bindingBottomSheetDataPickerFinish.hour.setOnValueChangedListener { numberPicker, _, _ ->
+            newFinishDate.set(Calendar.HOUR_OF_DAY, numberPicker.value)
+            bindingBottomSheetDataPickerFinish.liveDate.text = DATE_TIME_FORMAT.format(newFinishDate.time)
         }
 
-        bindingBottomSheetDataPickerFinish.minute.setOnValueChangedListener { numberPicker, i, i2 ->
-            minute2 = numberPicker.value.toString()
-            newFinishDate.set(Calendar.MINUTE, minute.toInt())
-
-            if (minute2.length == 1){
-                minute2 = '0' + minute2
-            }
-
-            bindingBottomSheetDataPickerFinish.liveDate.setText(date2 + ' ' + year2.toString()  + ' ' + hour2 + ':' + minute2)
+        bindingBottomSheetDataPickerFinish.minute.setOnValueChangedListener { numberPicker, _, _ ->
+            newFinishDate.set(Calendar.MINUTE, numberPicker.value)
+            bindingBottomSheetDataPickerFinish.liveDate.text = DATE_TIME_FORMAT.format(newFinishDate.time)
         }
 
         bindingBottomSheetDataPickerFinish.buttonOK.setOnClickListener {
-            binding.timeFinish.setText(bindingBottomSheetDataPickerFinish.liveDate.text)
+            binding.timeFinish.text = bindingBottomSheetDataPickerFinish.liveDate.text
+            finishDate.time = newFinishDate.time
             bottomSheetDataPickerFinish.dismiss()
         }
 
@@ -262,14 +276,14 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             bottomSheetDataPickerFinish.dismiss()
         }
 
-        var choosenColor = bindingBottomSheetColor.checkBox
+        var chosenColor = bindingBottomSheetColor.checkBox
 
         bindingBottomSheetColor.checkBox.setOnClickListener {
             if (bindingBottomSheetColor.checkBox.isChecked){
                 bindingBottomSheetColor.checkBox2.isChecked = false
                 bindingBottomSheetColor.checkBox3.isChecked = false
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.red))
-                choosenColor = bindingBottomSheetColor.checkBox
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.red))
+                chosenColor = bindingBottomSheetColor.checkBox
             }
 
             else{
@@ -281,14 +295,14 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             if (bindingBottomSheetColor.checkBox2.isChecked){
                 bindingBottomSheetColor.checkBox.isChecked = false
                 bindingBottomSheetColor.checkBox3.isChecked = false
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.green))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.green))
 
-                choosenColor = bindingBottomSheetColor.checkBox2
+                chosenColor = bindingBottomSheetColor.checkBox2
             }
 
             else{
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
-                choosenColor = bindingBottomSheetColor.checkBox
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.blue))
+                chosenColor = bindingBottomSheetColor.checkBox
             }
         }
 
@@ -296,28 +310,31 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             if (bindingBottomSheetColor.checkBox3.isChecked){
                 bindingBottomSheetColor.checkBox.isChecked = false
                 bindingBottomSheetColor.checkBox2.isChecked = false
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.berlin_lazur))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.berlin_lazur))
 
-                choosenColor = bindingBottomSheetColor.checkBox3
+                chosenColor = bindingBottomSheetColor.checkBox3
             }
 
             else{
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
-                choosenColor = bindingBottomSheetColor.checkBox
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.blue))
+                chosenColor = bindingBottomSheetColor.checkBox
             }
         }
 
         bindingBottomSheetColor.buttonOK.setOnClickListener {
-            binding.colour.setText(choosenColor.text)
+            binding.colour.text = chosenColor.text
 
-            when (choosenColor) {
-                bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+            when (chosenColor) {
+                bindingBottomSheetColor.checkBox -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                    resources.getColor(
                     R.color.red
                 ))
-                bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                bindingBottomSheetColor.checkBox2 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                    resources.getColor(
                     R.color.green
                 ))
-                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
+                    resources.getColor(
                     R.color.berlin_lazur
                 ))
             }
@@ -332,10 +349,8 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
 
     override fun showCalendarScreen() {
         val intent = Intent(this, CalendarActivity::class.java)
-        if (month != null) {
-            intent.putExtra(CalendarActivity.MESSAGE_YEAR, month!!.yearNumber)
-            intent.putExtra(CalendarActivity.MESSAGE_MONTH, month!!.monthNumber)
-        }
+        intent.putExtra(CalendarActivity.MESSAGE_YEAR, month.yearNumber)
+        intent.putExtra(CalendarActivity.MESSAGE_MONTH, month.monthNumber)
         startActivity(intent)
     }
 

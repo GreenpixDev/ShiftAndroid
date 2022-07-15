@@ -1,6 +1,7 @@
 package ru.cft.shift.scheduler.ui.calendar.day
 
 import ru.cft.shift.scheduler.data.Day
+import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.ui.base.BasePresenter
 import java.util.*
 
@@ -28,5 +29,13 @@ class DayPresenter : BasePresenter<DayMvpView>(), DayMvpPresenter {
     override fun unselect() {
         view?.hideSelection()
         selected = false
+    }
+
+    override fun addEvent(event: Event) {
+        view?.addEventView(event)
+    }
+
+    override fun removeEvent(eventId: Long) {
+        view?.removeEvent(eventId)
     }
 }

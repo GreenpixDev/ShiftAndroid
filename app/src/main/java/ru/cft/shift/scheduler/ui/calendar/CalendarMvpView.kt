@@ -14,6 +14,8 @@ interface CalendarMvpView : MvpView {
 
     fun showEventModalFragment(presenter: EventMvpPresenter)
 
+    fun showEventMenu()
+
     fun hideModalWindow()
 
     fun clearEventViews()

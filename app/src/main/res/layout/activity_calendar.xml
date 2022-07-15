@@ -164,6 +164,16 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
     </ScrollView>
 
+    <ImageButton
+        android:id="@+id/addEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_add"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Модальное окно настроек -->
     <FrameLayout
         android:id="@+id/modal_window"

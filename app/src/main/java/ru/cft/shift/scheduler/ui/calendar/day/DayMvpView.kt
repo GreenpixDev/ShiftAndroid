@@ -1,5 +1,6 @@
 package ru.cft.shift.scheduler.ui.calendar.day
 
+import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.ui.base.MvpView
 
 interface DayMvpView : MvpView {
@@ -15,5 +16,9 @@ interface DayMvpView : MvpView {
     fun showSelection()
 
     fun hideSelection()
+
+    fun addEventView(event: Event)
+
+    fun removeEvent(eventId: Long)
 
 }
