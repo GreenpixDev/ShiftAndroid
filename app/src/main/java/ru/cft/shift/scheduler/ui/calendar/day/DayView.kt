@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import ru.cft.shift.scheduler.R
+import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.databinding.ItemDayBinding
 
 class DayView @JvmOverloads constructor(
@@ -14,6 +15,8 @@ class DayView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs), DayMvpView {
 
     private val binding = ItemDayBinding.inflate(LayoutInflater.from(context), this)
+
+    private val events = hashMapOf<Long, Event>()
 
     val presenter = DayPresenter()
 
@@ -44,5 +47,17 @@ class DayView @JvmOverloads constructor(
 
     override fun hideSelection() {
         binding.selection.visibility = INVISIBLE
+    }
+
+    override fun addEventView(event: Event) {
+        events[event.id] = event
+        binding.hasEvent.visibility = VISIBLE
+    }
+
+    override fun removeEvent(eventId: Long) {
+        events.remove(eventId)
+        if (events.isEmpty()) {
+            binding.hasEvent.visibility = INVISIBLE
+        }
     }
 }

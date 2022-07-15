@@ -4,6 +4,6 @@ data class EventInfoResponse(
     val name: String,
     val dateRequest: DateRequest,
     val id: Long,
-    val type: String,
-    val color: EventColor
+    val type: String?,
+    val color: EventColor?
 )

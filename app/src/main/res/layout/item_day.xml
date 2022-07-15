@@ -15,6 +15,19 @@
         android:visibility="invisible"
         style="@style/Calendar.Day.Selected"/>
 
+    <ImageView
+        android:id="@+id/hasEvent"
+        android:visibility="invisible"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:background="@drawable/ic_circle"
+        android:backgroundTint="@color/black"
+        />
+
     <TextView
         android:id="@+id/number"
         android:layout_width="wrap_content"

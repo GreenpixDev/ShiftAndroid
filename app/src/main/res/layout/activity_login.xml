@@ -121,6 +121,7 @@
         app:layout_constraintWidth_percent="0.72" />
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/forgottPasswod"
         android:layout_width="0dp"
         android:layout_height="0dp"
