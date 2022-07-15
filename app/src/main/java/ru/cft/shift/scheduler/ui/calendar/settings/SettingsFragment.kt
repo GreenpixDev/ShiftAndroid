@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.cft.shift.scheduler.MainActivity
+import ru.cft.shift.scheduler.ui.login.LoginActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentSettingsBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
@@ -46,7 +46,7 @@ class SettingsFragment : BaseFragment<SettingsMvpPresenter>(), SettingsMvpView {
     }
 
     override fun showLoginMenu() {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
     }
 }

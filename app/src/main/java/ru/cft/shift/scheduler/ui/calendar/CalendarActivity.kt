@@ -22,11 +22,11 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
 
     private lateinit var binding: ActivityCalendarBinding
 
-    @Inject override lateinit var presenter: CalendarMvpPresenter
+    @Inject
+    override lateinit var presenter: CalendarMvpPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar)
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

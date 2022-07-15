@@ -6,6 +6,9 @@ import ru.cft.shift.scheduler.di.module.RetrofitModule
 import ru.cft.shift.scheduler.ui.calendar.CalendarActivity
 import ru.cft.shift.scheduler.ui.calendar.event.modal.EventModalFragment
 import ru.cft.shift.scheduler.ui.calendar.settings.SettingsFragment
+import ru.cft.shift.scheduler.ui.event.EventActivity
+import ru.cft.shift.scheduler.ui.login.LoginActivity
+import ru.cft.shift.scheduler.ui.register.RegistrationActivity
 import javax.inject.Singleton
 
 @Singleton
@@ -15,7 +18,13 @@ import javax.inject.Singleton
 ])
 interface AppComponent {
 
+    fun inject(activity: LoginActivity)
+
+    fun inject(activity: RegistrationActivity)
+
     fun inject(activity: CalendarActivity)
+
+    fun inject(activity: EventActivity)
 
     fun inject(fragment: EventModalFragment)
 
