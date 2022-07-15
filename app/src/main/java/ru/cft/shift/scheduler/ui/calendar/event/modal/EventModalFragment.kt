@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.cft.shift.scheduler.ui.event.EventActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentEventBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
 import ru.cft.shift.scheduler.ui.calendar.event.EventMvpPresenter
+import ru.cft.shift.scheduler.ui.event.EventActivity
 import javax.inject.Inject
 
 class EventModalFragment(

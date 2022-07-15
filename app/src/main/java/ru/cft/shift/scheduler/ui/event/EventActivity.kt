@@ -3,7 +3,6 @@ package ru.cft.shift.scheduler.ui.event
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.*

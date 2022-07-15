@@ -2,13 +2,12 @@ package ru.cft.shift.scheduler.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.Toast
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.ActivityLoginBinding
-import ru.cft.shift.scheduler.ui.register.RegistrationActivity
 import ru.cft.shift.scheduler.ui.base.BaseActivity
 import ru.cft.shift.scheduler.ui.calendar.CalendarActivity
+import ru.cft.shift.scheduler.ui.register.RegistrationActivity
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity<LoginMvpPresenter>(), LoginMvpView {

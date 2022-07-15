@@ -1,6 +1,5 @@
 package ru.cft.shift.scheduler.ui.register
 
-import ru.cft.shift.scheduler.dto.LoginRequest
 import ru.cft.shift.scheduler.dto.SignupRequest
 import ru.cft.shift.scheduler.repository.AuthRepository
 import ru.cft.shift.scheduler.ui.base.BasePresenter

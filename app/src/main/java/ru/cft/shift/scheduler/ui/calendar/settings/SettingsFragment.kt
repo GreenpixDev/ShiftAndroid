@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.cft.shift.scheduler.ui.login.LoginActivity
 import ru.cft.shift.scheduler.R
 import ru.cft.shift.scheduler.databinding.FragmentSettingsBinding
 import ru.cft.shift.scheduler.ui.base.BaseFragment
+import ru.cft.shift.scheduler.ui.login.LoginActivity
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment<SettingsMvpPresenter>(), SettingsMvpView {

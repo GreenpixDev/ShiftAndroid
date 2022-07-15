@@ -1,7 +1,6 @@
 package ru.cft.shift.scheduler.ui.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import ru.cft.shift.scheduler.R
