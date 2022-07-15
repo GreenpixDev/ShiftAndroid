@@ -48,6 +48,14 @@ class RegistrationActivity : BaseActivity<RegistrationMvpPresenter>(), Registrat
         ).show()
     }
 
+    override fun showInvalidPasswordLenghtToast() {
+        Toast.makeText(
+            this,
+            R.string.invalid_password_lenght,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
     override fun showInvalidEmailToast() {
         Toast.makeText(
             this,
