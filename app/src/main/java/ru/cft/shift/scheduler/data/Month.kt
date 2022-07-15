@@ -9,7 +9,7 @@ data class Month(
 
     val calendar: Calendar by lazy {
         val date = Calendar.getInstance()
-        date.set(yearNumber, monthNumber, 0, 0, 0, 0)
+        date.set(yearNumber, monthNumber, 1, 0, 0, 0)
         date
     }
 

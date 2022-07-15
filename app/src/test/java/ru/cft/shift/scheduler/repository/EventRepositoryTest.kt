@@ -16,7 +16,7 @@ class EventRepositoryTest {
 
     private companion object {
 
-        val DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sss")
+        val DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss")
 
         const val NAME = "test"
         const val TYPE = "meeting"

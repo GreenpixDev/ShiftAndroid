@@ -21,8 +21,8 @@ class EventView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs), EventMvpView {
 
     private companion object {
-        val TIME_FORMAT = SimpleDateFormat("hh:mm")
-        val DATE_FORMAT = SimpleDateFormat("MM-dd hh:mm")
+        val TIME_FORMAT = SimpleDateFormat("HH:mm")
+        val DATE_FORMAT = SimpleDateFormat("MM-dd HH:mm")
         const val MINUTE_MILLIS = 60000
         const val DAY_MILLIS = 86400000
     }
