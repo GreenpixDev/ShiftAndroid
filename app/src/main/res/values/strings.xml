@@ -23,4 +23,12 @@
     <string name="share">Поделиться</string>
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить</string>
+
+    <string name="PASSWORD_ERROR_MESSAGE">Пароль должен содержать строчные и прописные латинские буквы, цифры</string>
+    <string name="LOGIN_ERROR_MESSAGE">Логин должен состоять из букв и цифр, первый символ обязательно буква, ограничение 20 символов</string>
+
+    <string name="registration">Зарегистрироваться</string>
+    <string name="login">Войти</string>
+    <string name="forgot_password">Забыли пароль?</string>
+
 </resources>
