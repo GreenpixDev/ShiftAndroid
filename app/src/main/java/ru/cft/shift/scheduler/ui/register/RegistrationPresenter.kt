@@ -7,7 +7,7 @@ import ru.cft.shift.scheduler.utils.CallbackBuilder
 import javax.inject.Inject
 
 class RegistrationPresenter @Inject constructor(
-    val authRepository: AuthRepository
+    private val authRepository: AuthRepository
 ) : BasePresenter<RegistrationMvpView>(), RegistrationMvpPresenter {
 
     private companion object {

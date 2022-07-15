@@ -14,15 +14,20 @@ import javax.inject.Singleton
 @Module
 class RetrofitModule {
 
-    @Singleton
-    @Provides
-    fun provideCookieJar(): CookieJar = SessionCookieJar()
+    companion object {
+        const val DOMAIN = "plannerrestapi.herokuapp.com"
+        const val URL = "http://$DOMAIN/"
+    }
 
     @Singleton
     @Provides
-    fun provideRetrofit(cookieJar: CookieJar): Retrofit {
+    fun provideCookieJar(): SessionCookieJar = SessionCookieJar()
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(cookieJar: SessionCookieJar): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://plannerrestapi.herokuapp.com/")
+            .baseUrl(URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient().newBuilder()
                 .cookieJar(cookieJar)
