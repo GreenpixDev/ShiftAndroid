@@ -282,12 +282,16 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             if (bindingBottomSheetColor.checkBox.isChecked){
                 bindingBottomSheetColor.checkBox2.isChecked = false
                 bindingBottomSheetColor.checkBox3.isChecked = false
+                bindingBottomSheetColor.checkBoxGrey.isChecked = false
+                bindingBottomSheetColor.checkBoxViolet.isChecked = false
+                bindingBottomSheetColor.checkBoxYellow.isChecked = false
+
                 bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.red))
                 chosenColor = bindingBottomSheetColor.checkBox
             }
 
             else{
-                bindingBottomSheetColor.buttonOK.setBackgroundColor(Color.parseColor("#42AAFF"))
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
             }
         }
 
@@ -295,6 +299,10 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             if (bindingBottomSheetColor.checkBox2.isChecked){
                 bindingBottomSheetColor.checkBox.isChecked = false
                 bindingBottomSheetColor.checkBox3.isChecked = false
+                bindingBottomSheetColor.checkBoxGrey.isChecked = false
+                bindingBottomSheetColor.checkBoxViolet.isChecked = false
+                bindingBottomSheetColor.checkBoxYellow.isChecked = false
+
                 bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.green))
 
                 chosenColor = bindingBottomSheetColor.checkBox2
@@ -310,6 +318,10 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
             if (bindingBottomSheetColor.checkBox3.isChecked){
                 bindingBottomSheetColor.checkBox.isChecked = false
                 bindingBottomSheetColor.checkBox2.isChecked = false
+                bindingBottomSheetColor.checkBoxGrey.isChecked = false
+                bindingBottomSheetColor.checkBoxViolet.isChecked = false
+                bindingBottomSheetColor.checkBoxYellow.isChecked = false
+
                 bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.berlin_lazur))
 
                 chosenColor = bindingBottomSheetColor.checkBox3
@@ -317,6 +329,63 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
 
             else{
                 bindingBottomSheetColor.buttonOK.setBackgroundColor(resources.getColor(R.color.blue))
+                chosenColor = bindingBottomSheetColor.checkBox
+            }
+        }
+
+        bindingBottomSheetColor.checkBoxYellow.setOnClickListener {
+            if (bindingBottomSheetColor.checkBoxYellow.isChecked){
+                bindingBottomSheetColor.checkBox.isChecked = false
+                bindingBottomSheetColor.checkBox2.isChecked = false
+                bindingBottomSheetColor.checkBoxGrey.isChecked = false
+                bindingBottomSheetColor.checkBoxViolet.isChecked = false
+                bindingBottomSheetColor.checkBox3.isChecked = false
+
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.mark_light_yellow))
+
+                chosenColor = bindingBottomSheetColor.checkBoxYellow
+            }
+
+            else{
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
+                chosenColor = bindingBottomSheetColor.checkBoxYellow
+            }
+        }
+
+        bindingBottomSheetColor.checkBoxGrey.setOnClickListener {
+            if (bindingBottomSheetColor.checkBoxGrey.isChecked){
+                bindingBottomSheetColor.checkBox.isChecked = false
+                bindingBottomSheetColor.checkBox2.isChecked = false
+                bindingBottomSheetColor.checkBox3.isChecked = false
+                bindingBottomSheetColor.checkBoxViolet.isChecked = false
+                bindingBottomSheetColor.checkBoxYellow.isChecked = false
+
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.light_gray))
+
+                chosenColor = bindingBottomSheetColor.checkBoxGrey
+            }
+
+            else{
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
+                chosenColor = bindingBottomSheetColor.checkBox
+            }
+        }
+
+        bindingBottomSheetColor.checkBoxViolet.setOnClickListener {
+            if (bindingBottomSheetColor.checkBoxViolet.isChecked){
+                bindingBottomSheetColor.checkBox.isChecked = false
+                bindingBottomSheetColor.checkBox2.isChecked = false
+                bindingBottomSheetColor.checkBox3.isChecked = false
+                bindingBottomSheetColor.checkBoxGrey.isChecked = false
+                bindingBottomSheetColor.checkBoxYellow.isChecked = false
+
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.mark_dark_violet))
+
+                chosenColor = bindingBottomSheetColor.checkBoxViolet
+            }
+
+            else{
+                bindingBottomSheetColor.buttonOK.setBackgroundColor(getResources().getColor(R.color.blue))
                 chosenColor = bindingBottomSheetColor.checkBox
             }
         }
@@ -336,6 +405,15 @@ class EventActivity : BaseActivity<EventMvpPresenter>(), EventMvpView {
                 bindingBottomSheetColor.checkBox3 -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(
                     resources.getColor(
                     R.color.berlin_lazur
+                ))
+                bindingBottomSheetColor.checkBoxGrey -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                    R.color.light_gray
+                ))
+                bindingBottomSheetColor.checkBoxYellow -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                    R.color.mark_light_yellow
+                ))
+                bindingBottomSheetColor.checkBoxViolet -> binding.colorCircle.backgroundTintList = ColorStateList.valueOf(getResources().getColor(
+                    R.color.mark_dark_violet
                 ))
             }
 

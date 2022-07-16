@@ -51,6 +51,11 @@ class RegistrationPresenter @Inject constructor(
             return
         }
 
+        if ((username.length < 8) || (username.length > 24)) {
+            view?.showInvalidLoginLenghtToast()
+            return
+        }
+
         authRepository.signup(SignupRequest(
             login = username,
             email = email,

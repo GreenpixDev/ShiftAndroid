@@ -3,7 +3,7 @@
     <style name="Theme.ShiftAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/background</item>
         <!-- Secondary brand color. -->

@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.register.RegistrationActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/cyan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="1">
+
+        <TextView
+            android:id="@+id/tittle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/registration_tittle"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:autoSizePresetSizes="@array/autosize_text_sizes"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.45" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -13,7 +49,6 @@
         android:layout_height="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="50"
-        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
@@ -42,8 +77,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:endIconMode="password_toggle"
+        app:counterMaxLength="24"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
@@ -60,10 +94,10 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Login"
             android:inputType="text"
             app:autoSizePresetSizes="@array/autosize_text_sizes"
-            app:autoSizeTextType="uniform"
-            android:hint="Login" />
+            app:autoSizeTextType="uniform" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -81,7 +115,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479"
+        app:layout_constraintVertical_bias="0.544"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.72"
         app:startIconDrawable="@drawable/key">
@@ -90,10 +124,10 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Password"
             android:inputType="text"
             app:autoSizePresetSizes="@array/autosize_text_sizes"
-            app:autoSizeTextType="uniform"
-            android:hint="Password" />
+            app:autoSizeTextType="uniform" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -111,7 +145,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657"
+        app:layout_constraintVertical_bias="0.721"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.72"
         app:startIconDrawable="@drawable/key">
@@ -120,19 +154,21 @@
             android:id="@+id/passwordRepeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Repeat password"
             android:inputType="text"
             app:autoSizePresetSizes="@array/autosize_text_sizes"
-            app:autoSizeTextType="uniform"
-            android:hint="Repeat password" />
+            app:autoSizeTextType="uniform" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonInviteToRegistration"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:backgroundTint="@color/cyan"
         android:text="@string/registration"
         app:autoSizePresetSizes="@array/autosize_text_sizes"
         app:autoSizeTextType="uniform"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordRepeat"
         app:layout_constraintHeight_default="percent"
@@ -148,7 +184,8 @@
         android:id="@+id/buttonBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/back_button"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/button_back"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
