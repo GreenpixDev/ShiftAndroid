@@ -35,11 +35,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_default="percent"
-            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.45" />
+            app:layout_constraintWidth_percent="0.55" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -50,7 +50,6 @@
         android:layout_height="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="24"
-        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
