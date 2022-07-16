@@ -1,7 +1,9 @@
 package ru.cft.shift.scheduler.ui.event
 
 import ru.cft.shift.scheduler.data.Event
+import ru.cft.shift.scheduler.dto.EventColor
 import ru.cft.shift.scheduler.dto.EventInfoResponse
+import ru.cft.shift.scheduler.dto.EventType
 import ru.cft.shift.scheduler.mapper.EventRequestMapper
 import ru.cft.shift.scheduler.mapper.EventResponseMapper
 import ru.cft.shift.scheduler.repository.EventRepository
@@ -19,13 +21,25 @@ class EventPresenter @Inject constructor(
         super.onAttachView(mvpView)
 
         view?.let { view ->
-            view.eventId?.let { eventId ->
+            val eventId = view.eventId
+
+            if (eventId != null) {
                 eventRepository.findById(eventId).enqueueSafe(CallbackBuilder.create<EventInfoResponse>()
                     .onResponse { _, response ->
                         response.body()?.let { view.update(eventResponseMapper.map(it)) }
                     }
                     .build()
                 )
+            }
+            else view.day?.let {
+                view.update(Event(
+                    id = 0,
+                    name = "",
+                    begin = it.calendar.time,
+                    end = it.calendar.time,
+                    color = EventColor.RED,
+                    type = EventType.EVENT
+                ))
             }
         }
     }

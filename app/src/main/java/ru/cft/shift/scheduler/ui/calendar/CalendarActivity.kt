@@ -14,6 +14,7 @@ import ru.cft.shift.scheduler.ui.calendar.event.EventView
 import ru.cft.shift.scheduler.ui.calendar.event.modal.EventModalFragment
 import ru.cft.shift.scheduler.ui.calendar.settings.SettingsFragment
 import ru.cft.shift.scheduler.ui.calendar.week.WeekView
+import ru.cft.shift.scheduler.ui.event.EventActivity
 import java.text.DateFormatSymbols
 import java.util.*
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
     companion object {
         const val MESSAGE_YEAR = "year"
         const val MESSAGE_MONTH = "month"
+        const val MESSAGE_DAY = "day"
     }
 
     private lateinit var binding: ActivityCalendarBinding
@@ -38,6 +40,7 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         binding.settings.setOnClickListener { presenter.onShowSettingsClick() }
         binding.nextMonth.setOnClickListener { presenter.onNextMonthClick() }
         binding.previousMonth.setOnClickListener { presenter.onPreviousMonthClick() }
+        binding.addEvent.setOnClickListener { presenter.onAddEventClick() }
 
         component.inject(this)
     }
@@ -108,6 +111,14 @@ class CalendarActivity : BaseActivity<CalendarMvpPresenter>(), CalendarMvpView {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.modal_window, fragment)
         transaction.commit()
+    }
+
+    override fun showEventMenu() {
+        val intent = Intent(this, EventActivity::class.java)
+        intent.putExtra(MESSAGE_YEAR, presenter.month.yearNumber)
+        intent.putExtra(MESSAGE_MONTH, presenter.month.monthNumber)
+        presenter.selectedDay?.let { intent.putExtra(MESSAGE_DAY, it.dayNumber) }
+        startActivity(intent)
     }
 
     override fun hideModalWindow() {

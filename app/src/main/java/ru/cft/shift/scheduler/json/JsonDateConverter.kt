@@ -8,7 +8,7 @@ import java.util.*
 class JsonDateConverter : JsonSerializer<Date>, JsonDeserializer<Date> {
 
     private companion object {
-        val FORMAT = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sss")
+        val FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss")
     }
 
     override fun serialize(

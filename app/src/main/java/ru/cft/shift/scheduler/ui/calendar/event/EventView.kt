@@ -11,6 +11,7 @@ import ru.cft.shift.scheduler.data.Event
 import ru.cft.shift.scheduler.data.Mark
 import ru.cft.shift.scheduler.databinding.ItemEventBinding
 import ru.cft.shift.scheduler.dto.EventColor
+import ru.cft.shift.scheduler.ui.calendar.CalendarActivity
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
@@ -20,13 +21,15 @@ class EventView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs), EventMvpView {
 
     private companion object {
-        val TIME_FORMAT = SimpleDateFormat("hh:mm")
-        val DATE_FORMAT = SimpleDateFormat("MM-dd hh:mm")
+        val TIME_FORMAT = SimpleDateFormat("HH:mm")
+        val DATE_FORMAT = SimpleDateFormat("MM-dd HH:mm")
         const val MINUTE_MILLIS = 60000
         const val DAY_MILLIS = 86400000
     }
 
     private val binding = ItemEventBinding.inflate(LayoutInflater.from(context), this)
+
+    private var event: Event? = null
 
     val presenter = EventPresenter()
 
@@ -35,6 +38,7 @@ class EventView @JvmOverloads constructor(
     }
 
     override fun update(event: Event) {
+        this.event = event
         val mark = createMarkByEventColor(event.color)
 
         binding.name.text = event.name
@@ -58,6 +62,7 @@ class EventView @JvmOverloads constructor(
 
     override fun remove() {
         (parent as ViewGroup).removeView(this)
+        event?.let { (context as CalendarActivity).presenter.removeEvent(it) }
     }
 
     private fun createMarkByEventColor(eventColor: EventColor): Mark {
