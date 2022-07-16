@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShiftAndroid</string>
+    <string name="app_name">Things on Time</string>
 
     <string name="textRegistration">У вас нет аккаунта?</string>
     <string name="event_tittle">Событие</string>
@@ -42,5 +42,6 @@
     <string name="login">Войти</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="login_account">Войти в аккаунт</string>
+
 
 </resources>
